@@ -1,0 +1,83 @@
+<?php $this->headTitle('Contact Us') ?>
+
+<div class="row intro">
+	<h2 class="span6">Contact <span class="theme-color">Us</span></h2>
+	<h2 class="span6 text-right">Call Us: <span class="theme-color">0845</span>-838-0284</h2>
+</div>
+
+
+<div class="row">
+	<form class="form"  method="post" action="<?=$this->url('contact/process') ?>">
+		<fieldset>
+			<legend>Contact Form</legend>
+		</fieldset>
+		
+		<div class="control-group<?php if ($this->form->get('name')->getMessages()) echo ' error'; ?>">
+            <label class="control-label" for="name">Name:</label>
+            <div class="controls">
+                <?=$this->formInput($this->form->get('name')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('name'), [
+                    'class' => 'unstyled'
+                ]); ?>
+                </span>
+            </div>
+        </div>
+        
+        <div class="control-group<?php if ($this->form->get('email')->getMessages()) echo ' error'; ?>">
+            <label class="control-label" for="email">Email:</label>
+            <div class="controls">
+                <?=$this->formInput($this->form->get('email')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('email'), [
+                    'class' => 'unstyled'
+                ]); ?>
+                </span>
+            </div>
+        </div>
+        
+        <div class="control-group<?php if ($this->form->get('subject')->getMessages()) echo ' error'; ?>">
+            <label class="control-label" for="subject">Subject:</label>
+            <div class="controls">
+                <?=$this->formInput($this->form->get('subject')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('subject'), [
+                    'class' => 'unstyled'
+                ]); ?>
+                </span>
+            </div>
+        </div>
+        
+        <div class="control-group<?php if ($this->form->get('body')->getMessages()) echo ' error'; ?>">
+            <label class="control-label" for="body">Message:</label>
+            <div class="controls">
+                <?=$this->formTextarea($this->form->get('body')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('body'), [
+                    'class' => 'unstyled'
+                ]); ?>
+                </span>
+            </div>
+        </div>
+        
+        <div class="control-group<?php if ($this->form->get('captcha')->getMessages()) echo ' error'; ?>">
+            <label class="control-label" for="captcha">Please verify you are human.</label>
+            <div class="controls">
+                <?=$this->formCaptcha($this->form->get('captcha')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('captcha'), [
+                    'class' => 'unstyled'
+                ]); ?>
+                </span>
+            </div>
+        </div>
+		
+		 <div class="control-group">
+            <div class="controls">
+            	<?=$this->formElement($this->form->get('csrf')); ?>
+                <button type="submit" class="btn btn-primary" 
+                data-loading-text="Please wait...">Send</button>
+            </div>
+        </div>
+	</form>
+</div>
