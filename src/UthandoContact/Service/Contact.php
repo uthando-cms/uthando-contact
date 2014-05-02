@@ -20,7 +20,7 @@ class Contact implements ServiceLocatorAwareInterface
         $subject = '[Contact Form] ' . $data['subject'];
         $body    = $data['body'];
         
-        $this->getServiceLocator()
+        $message = $this->getServiceLocator()
             ->get('UthandoContact\Service\MailMessage')
             ->addFrom($from)
             ->addReplyTo($from)
@@ -29,7 +29,7 @@ class Contact implements ServiceLocatorAwareInterface
         
         $this->getServiceLocator()
             ->get('UthandoContact\Service\MailTransport')
-            ->send($this->message);
+            ->send($message);
     }
     
     public function getContactForm($data=null)

@@ -8,7 +8,7 @@ class Contact extends AbstractViewHelper
     public function __invoke()
     {
         $config = $this->getConfig('contact');
-    
-        return $config['contact']['details'];
+           
+        return $config;
     }
 }

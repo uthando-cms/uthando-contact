@@ -22,19 +22,19 @@ return [
             ]
         ],
         'details' => [
-            'name' => '',
+            'name' => 'Joe Blogs',
             'address' => [
-                'line1' => '',
+                'line1' => '1 Fake street',
                 'line2' => '',
-                'town' => '',
-                'county' => '',
-                'postcode' => '',
-                'country' => ''
+                'town' => 'Bogusville',
+                'county' => 'Bluffshire',
+                'postcode' => 'AA12 2BC',
+                'country' => 'Shady Land'
             ],
-            'phone' => '',
+            'phone' => '01234 567890',
             'fax' => '',
             'mobile' => '',
-            'email' => ''
+            'email' => 'job@blogs.wobble'
         ],
     ],
     'userAcl' => [
