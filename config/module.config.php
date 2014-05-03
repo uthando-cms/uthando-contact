@@ -41,14 +41,18 @@ return [
         'userRoles' => [
             'guest' => [
                 'privileges' => [
-                    ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
-                    ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
+                    'allow' => [
+                        ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
+                        ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
+                    ],
                 ],
             ],
             'registered' => [
                 'privileges' => [
-                    ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
-                    ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
+                    'allow' => [
+                        ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
+                        ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
+                    ],
                 ],
             ],
         ],
