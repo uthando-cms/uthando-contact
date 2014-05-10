@@ -35,8 +35,9 @@ class Contact implements ServiceLocatorAwareInterface
     public function getContactForm($data=null)
     {
         $sl = $this->getServiceLocator();
+        $formManager = $sl->get('FormElementManager');
         
-        $form = $sl->get('UthandoContact\Form\Contact');
+        $form = $formManager->get('UthandoContact\Form\Contact');
         $form->setInputFilter($sl->get('UthandoContact\InputFilter\Contact'));
         $form->init();
         

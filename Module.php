@@ -10,17 +10,44 @@ class Module
     
     public function getServiceConfig()
     {
-        return include __DIR__ . '/config/service.config.php';
+        return [
+            'invokables'    => [
+                'UthandoContact\InputFilter\Contact'    => 'UthandoContact\InputFilter\Contact',
+                'UthandoContact\Service\Contact'        => 'UthandoContact\Service\Contact',
+            ],
+            'factories'     => [
+                'UthandoContact\Service\MailMessage'    => 'UthandoContact\Service\MailMessageFactory',
+                'UthandoContact\Service\MailTransport'  => 'UthandoContact\Service\MailTransportFactory',
+            ],
+        ];
     }
     
     public function getViewHelperConfig()
     {
-        return include __DIR__ . '/config/viewHelper.config.php';
+        return [
+            'invokables' => [
+                'Contact' => 'UthandoContact\View\Contact',
+            ],
+        ];
     }
     
     public function getControllerConfig()
     {
-        return include __DIR__ . '/config/controller.config.php';
+        return [
+            'invokables' => [
+        	   'UthandoContact\Controller\Captcha'    => 'UthandoContact\Controller\CaptchaController',
+        	   'UthandoContact\Controller\Contact'    => 'UthandoContact\Controller\ContactController',
+           ],
+        ];
+    }
+    
+    public function getFormElementConfig()
+    {
+    	return [
+        	'invokables' => [
+            	'ContactCaptcha'  => 'UthandoContact\Form\Element\Captcha',
+        	],
+    	];
     }
     
     public function getAutoloaderConfig()

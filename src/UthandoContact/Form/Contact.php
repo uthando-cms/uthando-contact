@@ -2,15 +2,9 @@
 namespace UthandoContact\Form;
 
 use Zend\Form\Form;
-use Zend\Form\Element\Captcha;
-use Zend\Form\Element\Csrf;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Contact extends Form implements ServiceLocatorAwareInterface
-{
-    use ServiceLocatorAwareTrait;
-    
+class Contact extends Form
+{   
     public function __construct($name = null)
     {
         parent::__construct($name);
@@ -81,12 +75,18 @@ class Contact extends Form implements ServiceLocatorAwareInterface
             ],
         ]);
     
-        $captcha = new Captcha('captcha');
-        $captcha->setCaptcha($this->getServiceLocator()->get('UthandoContact\Service\Captcha'));
-        $captcha->setOptions(['label' => 'Please verify you are human.']);
-        $this->add($captcha);
+        $this->add([
+            'name' => 'captcha',
+            'type' => 'ContactCaptcha',
+            'options' => [
+                'label' => 'Please verify you are human.'
+            ],
+        ]);
     
-        $this->add(new Csrf('csrf'));
+        $this->add([
+            'name' => 'csrf',
+            'type' => 'csrf',
+        ]);
     
         $this->add([
             'name' => 'Send',
