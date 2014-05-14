@@ -1,75 +1,76 @@
 <?php $this->headTitle('Contact Us') ?>
-
-<form class="form"  method="post" action="<?=$this->url('contact/process') ?>">
-	<fieldset>
-		<legend>Contact Form</legend>
-	</fieldset>
-	
-	<div class="control-group<?php if ($this->form->get('name')->getMessages()) echo ' error'; ?>">
-        <label class="control-label" for="name">Name:</label>
-        <div class="controls">
-            <?=$this->formInput($this->form->get('name')); ?>
-            <span class="help-block">
-            <?=$this->formElementErrors($this->form->get('name'), [
-                'class' => 'unstyled'
-            ]); ?>
-            </span>
+<div class="row">
+    <form class="col-sm-12 form-horizontal"  method="post" action="<?=$this->url('contact/process') ?>">
+    	<fieldset>
+    		<legend>Contact Form</legend>
+    	</fieldset>
+    	
+    	<div class="form-group<?php if ($this->form->get('name')->getMessages()) echo ' has-error'; ?>">
+            <label class="col-sm-2 control-label" for="name">Name:</label>
+            <div class="col-sm-6">
+                <?=$this->formInput($this->form->get('name')->setAttribute('class', 'form-control')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('name'), [
+                    'class' => 'list-unstyled'
+                ]); ?>
+                </span>
+            </div>
         </div>
-    </div>
-    
-    <div class="control-group<?php if ($this->form->get('email')->getMessages()) echo ' error'; ?>">
-        <label class="control-label" for="email">Email:</label>
-        <div class="controls">
-            <?=$this->formInput($this->form->get('email')); ?>
-            <span class="help-block">
-            <?=$this->formElementErrors($this->form->get('email'), [
-                'class' => 'unstyled'
-            ]); ?>
-            </span>
+        
+        <div class="form-group<?php if ($this->form->get('email')->getMessages()) echo ' has-error'; ?>">
+            <label class="col-sm-2 control-label" for="email">Email:</label>
+            <div class="col-sm-6">
+                <?=$this->formInput($this->form->get('email')->setAttribute('class', 'form-control')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('email'), [
+                    'class' => 'list-unstyled'
+                ]); ?>
+                </span>
+            </div>
         </div>
-    </div>
-    
-    <div class="control-group<?php if ($this->form->get('subject')->getMessages()) echo ' error'; ?>">
-        <label class="control-label" for="subject">Subject:</label>
-        <div class="controls">
-            <?=$this->formInput($this->form->get('subject')); ?>
-            <span class="help-block">
-            <?=$this->formElementErrors($this->form->get('subject'), [
-                'class' => 'unstyled'
-            ]); ?>
-            </span>
+        
+        <div class="form-group<?php if ($this->form->get('subject')->getMessages()) echo ' has-error'; ?>">
+            <label class="col-sm-2 control-label" for="subject">Subject:</label>
+            <div class="col-sm-6">
+                <?=$this->formInput($this->form->get('subject')->setAttribute('class', 'form-control')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('subject'), [
+                    'class' => 'list-unstyled'
+                ]); ?>
+                </span>
+            </div>
         </div>
-    </div>
-    
-    <div class="control-group<?php if ($this->form->get('body')->getMessages()) echo ' error'; ?>">
-        <label class="control-label" for="body">Message:</label>
-        <div class="controls">
-            <?=$this->formTextarea($this->form->get('body')); ?>
-            <span class="help-block">
-            <?=$this->formElementErrors($this->form->get('body'), [
-                'class' => 'unstyled'
-            ]); ?>
-            </span>
+        
+        <div class="form-group<?php if ($this->form->get('body')->getMessages()) echo ' has-error'; ?>">
+            <label class="col-sm-2 control-label" for="body">Message:</label>
+            <div class="col-sm-6">
+                <?=$this->formTextarea($this->form->get('body')->setAttribute('class', 'form-control')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('body'), [
+                    'class' => 'list-unstyled'
+                ]); ?>
+                </span>
+            </div>
         </div>
-    </div>
-    
-    <div class="control-group<?php if ($this->form->get('captcha')->getMessages()) echo ' error'; ?>">
-        <label class="control-label" for="captcha">Please verify you are human.</label>
-        <div class="controls">
-            <?=$this->formCaptcha($this->form->get('captcha')); ?>
-            <span class="help-block">
-            <?=$this->formElementErrors($this->form->get('captcha'), [
-                'class' => 'unstyled'
-            ]); ?>
-            </span>
+        
+        <div class="form-group<?php if ($this->form->get('captcha')->getMessages()) echo ' has-error'; ?>">
+            <label class="col-sm-2 control-label" for="captcha">Please verify you are human.</label>
+            <div class="col-sm-6">
+                <?=$this->formCaptcha($this->form->get('captcha')->setAttribute('class', 'form-control')); ?>
+                <span class="help-block">
+                <?=$this->formElementErrors($this->form->get('captcha'), [
+                    'class' => 'list-unstyled'
+                ]); ?>
+                </span>
+            </div>
         </div>
-    </div>
-	
-	 <div class="control-group">
-        <div class="controls">
-        	<?=$this->formElement($this->form->get('csrf')); ?>
-            <button type="submit" class="btn btn-primary" 
-            data-loading-text="Please wait...">Send</button>
+    	
+    	 <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            	<?=$this->formElement($this->form->get('csrf')); ?>
+                <button type="submit" class="btn btn-primary" 
+                data-loading-text="Please wait...">Send</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
