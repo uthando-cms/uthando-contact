@@ -37,28 +37,24 @@ return [
             'email' => 'job@blogs.wobble'
         ],
     ],
-    'userAcl' => [
-        'userRoles' => [
-            'guest' => [
-                'privileges' => [
-                    'allow' => [
-                        ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
-                        ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
+    'uthando_user' => [
+        'acl' => [
+            'roles' => [
+                'guest' => [
+                    'privileges' => [
+                        'allow' => [
+                            'controllers' => [
+                                'UthandoContact\Controller\Captcha' => ['action' => 'all'],
+                                'UthandoContact\Controller\Contact' => ['action' => 'all'],
+                            ],
+                        ],
                     ],
                 ],
             ],
-            'registered' => [
-                'privileges' => [
-                    'allow' => [
-                        ['controller' => 'UthandoContact\Controller\Captcha', 'action' => 'all'],
-                        ['controller' => 'UthandoContact\Controller\Contact', 'action' => 'all'],
-                    ],
-                ],
+            'resources' => [
+                'UthandoContact\Controller\Captcha',
+                'UthandoContact\Controller\Contact',
             ],
-        ],
-        'userResources' => [
-            'UthandoContact\Controller\Captcha',
-            'UthandoContact\Controller\Contact',
         ],
     ],
     'router' => [
