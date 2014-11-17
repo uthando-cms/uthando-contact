@@ -22,8 +22,8 @@ class Contact implements ServiceLocatorAwareInterface
         
         $message = $this->getServiceLocator()
             ->get('UthandoContact\Service\MailMessage')
-            ->addFrom($from)
-            ->addReplyTo($from)
+            ->setFrom($from)
+            ->setReplyTo($from)
             ->setSubject($subject)
             ->setBody($body);
         
