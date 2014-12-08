@@ -21,10 +21,10 @@ class Contact extends Form
             'name' => 'name',
             'type' => 'text',
             'attributes' => [
-                'placeholder' => 'Name:',
+                'placeholder' => 'Full name',
                 'required' => true,
                 'autofocus' => true,
-                'class' => 'input-xlarge',
+                'class' => 'form-control',
             ],
             'options' => [
                 'label' => 'Name:',
@@ -36,8 +36,8 @@ class Contact extends Form
             'name' => 'email',
             'type' => 'email',
             'attributes' => [
-                'placeholder' => 'Email:',
-                'class' => 'input-xlarge',
+                'placeholder' => 'Email Address',
+                'class' => 'form-control',
                 'required' => true
             ],
             'options' => [
@@ -54,8 +54,8 @@ class Contact extends Form
                 'required' => true
             ],
             'attributes' => [
-                'placeholder' => 'Subject:',
-                'class' => 'input-xlarge',
+                'placeholder' => 'Subject',
+                'class' => 'form-control',
                 'required' => true
             ],
         ]);
@@ -64,13 +64,13 @@ class Contact extends Form
             'name'  => 'body',
             'type'  => 'textarea',
             'options' => [
-                'label' => 'Your message:',
+                'label' => 'Your Message:',
                 'required' => true
             ],
             'attributes' => [
-                'placeholder' => 'Your Message:',
+                'placeholder' => 'Your message',
                 'required' => true,
-                'class' => 'span6',
+                'class' => 'form-control',
                 'rows' => 10,
             ],
         ]);
@@ -78,6 +78,11 @@ class Contact extends Form
         $this->add([
             'name' => 'captcha',
             'type' => 'ContactCaptcha',
+            'attributes' => [
+                'placeholder' => 'Type letters and number here',
+                'required' => true,
+                'class' => 'form-control',
+            ],
             'options' => [
                 'label' => 'Please verify you are human.'
             ],
@@ -86,14 +91,6 @@ class Contact extends Form
         $this->add([
             'name' => 'csrf',
             'type' => 'csrf',
-        ]);
-    
-        $this->add([
-            'name' => 'Send',
-            'type'  => 'submit',
-            'attributes' => [
-                'value' => 'Send',
-            ],
         ]);
     }
 }
