@@ -2,25 +2,48 @@
 
 namespace UthandoContact\Service;
 
+use UthandoCommon\Service\AbstractService;
 use Zend\Form\Form;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
-class Contact implements ServiceLocatorAwareInterface
+class Contact extends AbstractService
 {
-    use ServiceLocatorAwareTrait;
-    
+    /**
+     * @param $data
+     * array(
+        ['name'] => 'Charisma Beads Ltd'
+        ['email'] => 'shaun@shaunfreeman.co.uk'
+        ['subject'] => 'About the training'
+        ['body'] => 'tets'
+        ['captcha'] => array(
+            ['id'] => '46e5368415f17e62de2288ce5803f7c4'
+            ['input'] => 'h2r5juwi'
+        )
+        ['csrf'] => '780e663a8f3a548db88a465c66944e44-f135f79e6b704756a8c642d8deec2016'
+     )
+     */
     public function sendEmail($data)
     {
         if ($data instanceof Form) {
             $data = $data->getData();
         }
         
-        $from    = $data['email'];
+        //$from    = $data['email'];
         $subject = '[Contact Form] ' . $data['subject'];
-        $body    = $data['body'];
+        //$body    = $data['body'];
+
+        $data = [
+            'sender'    => [
+                'name'      => $data['name'],
+                'address'   => $data['email']
+            ],
+            'body'      => $data['body'],
+            'subject'   => $subject,
+            'transport' => 'default',
+        ];
+
+        $this->getEventManager()->trigger('mail.send', $this, $data);
         
-        $message = $this->getServiceLocator()
+        /*$message = $this->getServiceLocator()
             ->get('UthandoContact\Service\MailMessage')
             ->setFrom($from)
             ->setReplyTo($from)
@@ -29,7 +52,7 @@ class Contact implements ServiceLocatorAwareInterface
         
         $this->getServiceLocator()
             ->get('UthandoContact\Service\MailTransport')
-            ->send($message);
+            ->send($message);*/
     }
     
     public function getContactForm($data=null)

@@ -22,6 +22,7 @@
         "zendframework/zend-mail" : "2.*",
 	    "uthando-cms/uthando-common" : "1.*",
 	    "uthando-cms/uthando-admin" : "1.*",
+        "uthando-cms/uthando-mail" : "1.*",
         "giggsey/libphonenumber-for-php": "7.*"
     },
     "require-dev" : {
