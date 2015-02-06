@@ -12,19 +12,9 @@ class Module
     {
         return [
             'invokables' => [
-        	   'UthandoContact\Controller\Captcha'    => 'UthandoContact\Controller\CaptchaController',
         	   'UthandoContact\Controller\Contact'    => 'UthandoContact\Controller\ContactController',
            ],
         ];
-    }
-    
-    public function getFormElementConfig()
-    {
-    	return [
-        	'invokables' => [
-            	'ContactCaptcha'  => 'UthandoContact\Form\Element\Captcha',
-        	],
-    	];
     }
 
     public function getServiceConfig()

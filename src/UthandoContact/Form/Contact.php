@@ -77,7 +77,7 @@ class Contact extends Form
     
         $this->add([
             'name' => 'captcha',
-            'type' => 'ContactCaptcha',
+            'type' => 'UthandoCommonCaptcha',
             'attributes' => [
                 'placeholder' => 'Type letters and number here',
                 'required' => true,

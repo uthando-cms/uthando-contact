@@ -2,9 +2,6 @@
 
 return [
     'contact' => [
-        'captcha' => [
-            'class' => 'dumb'
-        ],
         'form' => [
             'name' => 'contact'
         ],
@@ -44,7 +41,6 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoContact\Controller\Captcha' => ['action' => 'all'],
                                 'UthandoContact\Controller\Contact' => ['action' => 'all'],
                             ],
                         ],
@@ -52,7 +48,6 @@ return [
                 ],
             ],
             'resources' => [
-                'UthandoContact\Controller\Captcha',
                 'UthandoContact\Controller\Contact',
             ],
         ],
@@ -87,16 +82,6 @@ return [
                             'route' => '/thank-you',
                             'defaults' => [
                                 'action' => 'thank-you'
-                            ],
-                        ],
-                    ],
-                    'captcha-form-generate' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/captcha/[:id]',
-                            'defaults' => [
-                                'controller'    => 'Captcha',
-                                'action'        => 'generate'
                             ],
                         ],
                     ],
