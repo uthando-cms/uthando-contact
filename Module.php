@@ -24,10 +24,6 @@ class Module
                 'UthandoContact\InputFilter\Contact'    => 'UthandoContact\InputFilter\Contact',
                 'UthandoContact\Service\Contact'        => 'UthandoContact\Service\Contact',
             ],
-            'factories'     => [
-                'UthandoContact\Service\MailMessage'    => 'UthandoContact\Service\MailMessageFactory',
-                'UthandoContact\Service\MailTransport'  => 'UthandoContact\Service\MailTransportFactory',
-            ],
         ];
     }
 

@@ -6,7 +6,5 @@ return array(
     'UthandoContact\Form\Contact'                 => __DIR__ . '/src/UthandoContact/Form/Contact.php',
     'UthandoContact\InputFilter\Contact'          => __DIR__ . '/src/UthandoContact/InputFilter/Contact.php',
     'UthandoContact\Service\Contact'              => __DIR__ . '/src/UthandoContact/Service/Contact.php',
-    'UthandoContact\Service\MailMessageFactory'   => __DIR__ . '/src/UthandoContact/Service/MailMessageFactory.php',
-    'UthandoContact\Service\MailTransportFactory' => __DIR__ . '/src/UthandoContact/Service/MailTransportFactory.php',
     'UthandoContact\View\Contact'                 => __DIR__ . '/src/UthandoContact/View/Contact.php',
 );

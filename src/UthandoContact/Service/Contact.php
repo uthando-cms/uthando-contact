@@ -42,17 +42,6 @@ class Contact extends AbstractService
         ];
 
         $this->getEventManager()->trigger('mail.send', $this, $data);
-        
-        /*$message = $this->getServiceLocator()
-            ->get('UthandoContact\Service\MailMessage')
-            ->setFrom($from)
-            ->setReplyTo($from)
-            ->setSubject($subject)
-            ->setBody($body);
-        
-        $this->getServiceLocator()
-            ->get('UthandoContact\Service\MailTransport')
-            ->send($message);*/
     }
     
     public function getContactForm($data=null)
