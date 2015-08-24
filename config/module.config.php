@@ -16,7 +16,7 @@ return [
             // can also contain a "name" element
             'sender' => [
                 'address' => 'user@example.com'
-            ]
+            ],
         ],
         'details' => [
             'name' => 'Joe Blogs',
