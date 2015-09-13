@@ -1,25 +1,28 @@
 <?php
+/**
+ * Uthando CMS (http://www.shaunfreeman.co.uk/)
+ *
+ * @package   UthandoContact
+ * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
+ * @link      https://github.com/uthando-cms for the canonical source repository
+ * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @license   see LICENSE.txt
+ */
 
 namespace UthandoContact\Service;
 
 use UthandoCommon\Service\AbstractService;
 use Zend\Form\Form;
 
+/**
+ * Class Contact
+ *
+ * @package UthandoContact\Service
+ */
 class Contact extends AbstractService
 {
     /**
      * @param $data
-     * array(
-        ['name'] => 'Charisma Beads Ltd'
-        ['email'] => 'shaun@shaunfreeman.co.uk'
-        ['subject'] => 'About the training'
-        ['body'] => 'tets'
-        ['captcha'] => array(
-            ['id'] => '46e5368415f17e62de2288ce5803f7c4'
-            ['input'] => 'h2r5juwi'
-        )
-        ['csrf'] => '780e663a8f3a548db88a465c66944e44-f135f79e6b704756a8c642d8deec2016'
-     )
      */
     public function sendEmail($data)
     {
@@ -43,7 +46,11 @@ class Contact extends AbstractService
 
         $this->getEventManager()->trigger('mail.send', $this, $data);
     }
-    
+
+    /**
+     * @param null $data
+     * @return mixed
+     */
     public function getContactForm($data=null)
     {
         $sl = $this->getServiceLocator();
