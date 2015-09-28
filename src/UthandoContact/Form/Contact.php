@@ -2,11 +2,11 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoContact
+ * @package   UthandoContact\Form
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @link      https://github.com/uthando-cms for the canonical source repository
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoContact\Form;
@@ -19,19 +19,26 @@ use Zend\Form\Form;
  * @package UthandoContact\Form
  */
 class Contact extends Form
-{   
-    public function __construct($name = null)
+{
+    /**
+     * @param null $name
+     * @param array $options
+     */
+    public function __construct($name = null, $options = [])
     {
-        parent::__construct($name);
+        parent::__construct($name, $options);
     }
-    
+
+    /**
+     * Set up form elements
+     */
     public function init()
     {
-        
+
         if (null === $this->getName()) {
             $this->setName('contact');
         }
-    
+
         $this->add([
             'name' => 'name',
             'type' => 'text',
@@ -46,7 +53,7 @@ class Contact extends Form
                 'required' => true
             ],
         ]);
-    
+
         $this->add([
             'name' => 'email',
             'type' => 'email',
@@ -60,9 +67,9 @@ class Contact extends Form
                 'required' => true
             ],
         ]);
-    
+
         $this->add([
-            'name'  => 'subject',
+            'name' => 'subject',
             'type' => 'text',
             'options' => [
                 'label' => 'Subject:',
@@ -74,10 +81,10 @@ class Contact extends Form
                 'required' => true
             ],
         ]);
-        
+
         $this->add([
-            'name'  => 'body',
-            'type'  => 'textarea',
+            'name' => 'body',
+            'type' => 'textarea',
             'options' => [
                 'label' => 'Your Message:',
                 'required' => true
@@ -89,7 +96,7 @@ class Contact extends Form
                 'rows' => 10,
             ],
         ]);
-    
+
         $this->add([
             'name' => 'captcha',
             'type' => 'UthandoCommonCaptcha',
@@ -102,7 +109,7 @@ class Contact extends Form
                 'label' => 'Please verify you are human.'
             ],
         ]);
-    
+
         $this->add([
             'name' => 'csrf',
             'type' => 'csrf',

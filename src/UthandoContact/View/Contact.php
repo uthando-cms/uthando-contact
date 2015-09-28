@@ -2,7 +2,7 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoContact
+ * @package   UthandoContact\View
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @link      https://github.com/uthando-cms for the canonical source repository
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
@@ -30,7 +30,7 @@ class Contact extends AbstractViewHelper
      * @param null $key
      * @return $this|Config|string
      */
-    public function __invoke($key=null)
+    public function __invoke($key = null)
     {
         if (!$this->contactConfig instanceof Config) {
             $config = $this->getConfig('contact');

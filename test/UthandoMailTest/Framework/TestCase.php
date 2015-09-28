@@ -2,15 +2,18 @@
 
 namespace UthandoContactTest\Framework;
 
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
+use UthandoContactTest\Bootstrap;
+use Zend\ServiceManager\ServiceManager;
 
-class TestCase extends AbstractHttpControllerTestCase
+class TestCase extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ServiceManager
+     */
+    protected $serviceManager;
+
     protected function setUp()
     {
-        $this->setApplicationConfig(
-            include __DIR__ . '/../../TestConfig.php.dist'
-        );
-        parent::setUp();
+        $this->serviceManager = Bootstrap::getServiceManager();
     }
 }
