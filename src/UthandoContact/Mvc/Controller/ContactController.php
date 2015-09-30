@@ -9,7 +9,7 @@
  * @license   see LICENSE.txt
  */
 
-namespace UthandoContact\Controller;
+namespace UthandoContact\Mvc\Controller;
 
 use UthandoContact\Service\Contact;
 use Zend\Http\PhpEnvironment\Request;
@@ -20,8 +20,7 @@ use Zend\View\Model\ViewModel;
 /**
  * Class ContactController
  *
- * @package UthandoContact\Controller
- * @method Request getRequest()
+ * @package UthandoContact\Mvc\Controller
  */
 class ContactController extends AbstractActionController
 {

@@ -33,7 +33,7 @@ class Contact extends AbstractViewHelper
     public function __invoke($key = null)
     {
         if (!$this->contactConfig instanceof Config) {
-            $config = $this->getConfig('contact');
+            $config = $this->getConfig('uthando_contact');
 
             if (!$config instanceof Config) {
                 $config = new Config($config);

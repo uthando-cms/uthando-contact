@@ -3,4 +3,5 @@
 return array(
     'uthando-contact/contact/index'     => __DIR__ . '/view/uthando-contact/contact/index.phtml',
     'uthando-contact/contact/thank-you' => __DIR__ . '/view/uthando-contact/contact/thank-you.phtml',
+    'uthando-contact/settings/index'    => __DIR__ . '/view/uthando-contact/settings/index.phtml',
 );

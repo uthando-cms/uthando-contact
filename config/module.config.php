@@ -3,7 +3,14 @@
 return [
     'controllers' => [
         'invokables' => [
-            'UthandoContact\Controller\Contact' => 'UthandoContact\Controller\ContactController',
+            'UthandoContact\Controller\Contact'     => 'UthandoContact\Mvc\Controller\ContactController',
+            'UthandoContact\Controller\Settings'    => 'UthandoContact\Mvc\Controller\Settings',
+        ],
+    ],
+    'form_elements' => [
+        'invokables' => [
+            'UthandoContact'            => 'UthandoContact\Form\Contact',
+            'UthandoContactSettings'    => 'UthandoContact\Form\ContactSettings',
         ],
     ],
     'service_manager' => [

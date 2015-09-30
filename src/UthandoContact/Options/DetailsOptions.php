@@ -4,13 +4,16 @@
  *
  * @package   UthandoContact\Options
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
- * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
+ * @copyright Copyright (c) 2015 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
 
 namespace UthandoContact\Options;
 
+use UthandoContact\Model\AddressLinesCollection;
+use UthandoContact\Model\BusinessHoursCollection;
 use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\Exception\InvalidArgumentException;
 
 /**
  * Class DetailsOptions
@@ -25,7 +28,7 @@ class DetailsOptions extends AbstractOptions
     protected $name;
 
     /**
-     * @var array
+     * @var AddressLinesCollection
      */
     protected $address;
 
@@ -50,7 +53,179 @@ class DetailsOptions extends AbstractOptions
     protected $email;
 
     /**
-     * @var array
+     * @var BusinessHoursCollection
      */
     protected $businessHours;
+
+    /**
+     * @var string
+     */
+    protected $text;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return AddressLinesCollection
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param $addressLines
+     * @return $this
+     * @throws InvalidArgumentException
+     */
+    public function setAddress($addressLines)
+    {
+        if (is_array($addressLines)) {
+            $addressLines = new AddressLinesCollection($addressLines);
+        }
+
+        if (!$addressLines instanceof AddressLinesCollection) {
+            throw new InvalidArgumentException(
+                'you must only use an array or an instance of UthandoContact\Model\AddressLinesCollection'
+            );
+        }
+
+        $this->address = $addressLines;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return $this
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * @param string $fax
+     * @return $this
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param string $mobile
+     * @return $this
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return BusinessHoursCollection
+     */
+    public function getBusinessHours()
+    {
+        return $this->businessHours;
+    }
+
+    /**
+     * @param BusinessHoursCollection $businessHours
+     * @return $this
+     */
+    public function setBusinessHours($businessHours)
+    {
+        if (is_array($businessHours)) {
+            $businessHours = new BusinessHoursCollection($businessHours);
+        }
+
+        if (!$businessHours instanceof BusinessHoursCollection) {
+            throw new InvalidArgumentException(
+                'you must only use an array or an instance of UthandoContact\Model\BusinessHoursCollection'
+            );
+        }
+
+        $this->businessHours = $businessHours;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
+    }
 }

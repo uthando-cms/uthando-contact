@@ -13,9 +13,19 @@ return [
                         ],
                     ],
                 ],
+                'admin' => [
+                    'privileges' => [
+                        'allow' => [
+                            'controllers' => [
+                                'UthandoContact\Controller\Settings' => ['action' => 'all'],
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'resources' => [
                 'UthandoContact\Controller\Contact',
+                'UthandoContact\Controller\Settings',
             ],
         ],
     ],

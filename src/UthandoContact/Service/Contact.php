@@ -43,7 +43,7 @@ class Contact extends AbstractService
             ],
             'body' => $data['body'],
             'subject' => $subject,
-            'transport' => 'default',
+            'transport' => 'webmaster',
         ];
 
         $this->getEventManager()->trigger('mail.send', $this, $data);

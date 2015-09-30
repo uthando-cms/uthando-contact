@@ -31,8 +31,8 @@ class Bootstrap
             ),
             'modules' => array(
                 'Application',
-                'UthandoContact',
                 'UthandoCommon',
+                'UthandoContact',
             ),
         );
 

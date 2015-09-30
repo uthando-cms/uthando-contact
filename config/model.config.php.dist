@@ -2,22 +2,7 @@
 
 return [
     'contact' => [
-        'form' => [
-            'name' => 'contact'
-        ],
-        'mail_transport' => [
-            'class' => 'Zend\Mail\Transport\SendMail'
-        ],
-        'message' => [
-            // These can be either a string, or an array of email => name pairs
-            'to' => 'user@example.com',
-            'from' => 'user@example.com',
-            // This should be an array with minimally an "address" element, and
-            // can also contain a "name" element
-            'sender' => [
-                'address' => 'user@example.com'
-            ],
-        ],
+        'transport' => 'default',
         'details' => [
             'name' => 'Joe Blogs',
             'address' => [
