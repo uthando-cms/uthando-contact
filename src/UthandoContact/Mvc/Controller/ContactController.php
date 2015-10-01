@@ -78,7 +78,7 @@ class ContactController extends AbstractActionController
         $headers = $this->getRequest()->getHeaders();
 
         if (!$headers->has('Referer')
-            || !preg_match('#/contact|process$#', $headers->get('Referer')->getFieldValue())
+            || !preg_match('#/contact/process$#', $headers->get('Referer')->getFieldValue())
         ) {
             return $this->redirect()->toRoute('contact');
         }

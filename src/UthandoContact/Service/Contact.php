@@ -25,6 +25,7 @@ class Contact extends AbstractService
 {
     /**
      * @param $data
+     * @return bool
      */
     public function sendEmail($data)
     {
@@ -47,6 +48,8 @@ class Contact extends AbstractService
         ];
 
         $this->getEventManager()->trigger('mail.send', $this, $data);
+
+        return true;
     }
 
     /**

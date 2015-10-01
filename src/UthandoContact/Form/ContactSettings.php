@@ -19,5 +19,8 @@ use Zend\Form\Form;
  */
 class ContactSettings extends Form
 {
+    public function init()
+    {
 
+    }
 }
