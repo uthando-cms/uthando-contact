@@ -27,4 +27,49 @@ return [
     'view_manager'  => [
         'template_map' => include __DIR__ . '/../template_map.php'
     ],
+    'router' => [
+        'routes' => [
+            'contact' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/contact',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'UthandoContact\Controller',
+                        'controller'    => 'Contact',
+                        'action'        => 'index',
+                        'force-ssl'     => 'ssl'
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'process' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/process',
+                            'defaults' => [
+                                'action' => 'process'
+                            ],
+                        ],
+                    ],
+                    'thank-you' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/thank-you',
+                            'defaults' => [
+                                'action' => 'thank-you'
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'navigation' => [
+        'default' => [
+            'contact' => [
+                'label' => 'Contact',
+                'route' => 'contact',
+            ],
+        ],
+    ],
 ];
