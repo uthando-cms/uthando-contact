@@ -9,8 +9,13 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            'UthandoContact'            => 'UthandoContact\Form\Contact',
-            'UthandoContactSettings'    => 'UthandoContact\Form\ContactSettings',
+            'UthandoContact'                            => 'UthandoContact\Form\Contact',
+            'UthandoContactAddressLineFieldSet'         => 'UthandoContact\Form\AddressLineFieldSet',
+            'UthandoContactCompanyOptionsFieldSet'      => 'UthandoContact\Form\CompanyOptionsFieldSet',
+            'UthandoContactDetailsOptionsFieldSet'      => 'UthandoContact\Form\DetailsOptionsFieldSet',
+            'UthandoContactFormOptionsFieldSet'         => 'UthandoContact\Form\FormOptionsFieldSet',
+            'UthandoContactGoogleMapOptionsFieldSet'    => 'UthandoContact\Form\GoogleMapOptionsFieldSet',
+            'UthandoContactSettings'                    => 'UthandoContact\Form\ContactSettings',
         ],
     ],
     'service_manager' => [
