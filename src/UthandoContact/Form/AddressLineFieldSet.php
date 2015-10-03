@@ -70,7 +70,7 @@ class AddressLineFieldSet extends Fieldset implements InputFilterProviderInterfa
     {
         return [
             'label' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -84,7 +84,7 @@ class AddressLineFieldSet extends Fieldset implements InputFilterProviderInterfa
                 ],
             ],
             'text' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],

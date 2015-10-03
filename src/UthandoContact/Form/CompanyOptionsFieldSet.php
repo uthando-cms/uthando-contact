@@ -70,7 +70,7 @@ class CompanyOptionsFieldSet extends Fieldset implements InputFilterProviderInte
             'type' => 'Zend\Form\Element\Collection',
             'name' => 'address',
             'options' => [
-                'label' => 'Add footer lines to PDF',
+                'label' => 'Add address lines',
                 'label_options' => [
                     'disable_html_escape' => true,
                 ],

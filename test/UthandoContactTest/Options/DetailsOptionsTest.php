@@ -49,6 +49,12 @@ class DetailsOptionsTest extends \PHPUnit_Framework_TestCase
         $this->fail('Expected exception "Zend\Stdlib\Exception\InvalidArgumentException" not thrown');
     }
 
+    public function testSetGetPhoneRegion()
+    {
+        $this->model->setPhoneRegion('GB');
+        $this->assertSame('GB', $this->model->getPhoneRegion());
+    }
+
     public function testSetGetPhone()
     {
         $this->model->setPhone('01234 123456');
@@ -93,7 +99,7 @@ class DetailsOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetText()
     {
-        $this->model->setText('This is a short text about the company');
-        $this->assertSame('This is a short text about the company', $this->model->getText());
+        $this->model->setAboutUsText('This is a short text about the company');
+        $this->assertSame('This is a short text about the company', $this->model->getAboutUsText());
     }
 }

@@ -35,6 +35,11 @@ class DetailsOptions extends AbstractOptions
     /**
      * @var string
      */
+    protected $phoneRegion;
+
+    /**
+     * @var string
+     */
     protected $phone;
 
     /**
@@ -60,7 +65,7 @@ class DetailsOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $text;
+    protected $aboutUsText;
 
     /**
      * @return string
@@ -107,6 +112,24 @@ class DetailsOptions extends AbstractOptions
 
         $this->address = $addressLines;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneRegion()
+    {
+        return $this->phoneRegion;
+    }
+
+    /**
+     * @param string $phoneRegion
+     * @return $this
+     */
+    public function setPhoneRegion($phoneRegion)
+    {
+        $this->phoneRegion = $phoneRegion;
         return $this;
     }
 
@@ -214,18 +237,18 @@ class DetailsOptions extends AbstractOptions
     /**
      * @return string
      */
-    public function getText()
+    public function getAboutUsText()
     {
-        return $this->text;
+        return $this->aboutUsText;
     }
 
     /**
-     * @param string $text
+     * @param string $aboutUsText
      * @return $this
      */
-    public function setText($text)
+    public function setAboutUsText($aboutUsText)
     {
-        $this->text = $text;
+        $this->aboutUsText = $aboutUsText;
         return $this;
     }
 }

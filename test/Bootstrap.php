@@ -8,6 +8,7 @@ use Zend\ServiceManager\ServiceManager;
 
 error_reporting(E_ALL | E_STRICT);
 chdir(__DIR__);
+ini_set('date.timezone', 'Europe/London');
 
 /**
  * Test bootstrap, for setting up autoloading

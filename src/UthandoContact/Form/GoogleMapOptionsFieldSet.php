@@ -104,7 +104,7 @@ class GoogleMapOptionsFieldSet extends Fieldset implements InputFilterProviderIn
     {
         return [
             'latitude' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -118,7 +118,7 @@ class GoogleMapOptionsFieldSet extends Fieldset implements InputFilterProviderIn
                 ],
             ],
             'longitude' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -132,7 +132,7 @@ class GoogleMapOptionsFieldSet extends Fieldset implements InputFilterProviderIn
                 ],
             ],
             'zoom' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -143,11 +143,11 @@ class GoogleMapOptionsFieldSet extends Fieldset implements InputFilterProviderIn
                         'min' => 1,
                         'max' => 20,
                         'inclusive' => true
-                    ]]
+                    ]],
                 ],
             ],
             'color' => [
-                'required' => false,
+                'required' => true,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
