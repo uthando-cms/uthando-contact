@@ -70,4 +70,34 @@ class Contact extends AbstractViewHelper
 
         return $returnValue;
     }
+
+    /**
+     * @return string
+     */
+    public function businessHours()
+    {
+        $businessHours  = $this->get('details.business_hours');
+        $html           = '';
+
+        foreach ($businessHours as $daysAndHours) {
+            $html .= '<span class="block"><strong>' . $daysAndHours['label'] . ':</strong> ' . $daysAndHours['text'] . '</span>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * @return string
+     */
+    public function formatAddress($address)
+    {
+        $address    = $this->get($address);
+        $html       = '';
+
+        foreach($address as $key => $line) {
+            $html .= $line['text'] . ', ';
+        }
+
+        return rtrim($html, ', ');
+    }
 }

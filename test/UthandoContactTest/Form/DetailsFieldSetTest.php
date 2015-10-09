@@ -10,14 +10,14 @@
 
 namespace UthandoContactTest\Form;
 
-use UthandoContact\Form\DetailsOptionsFieldSet;
+use UthandoContact\Form\DetailsFieldSet;
 use UthandoContactTest\Framework\TestCase;
 
-class DetailsOptionsFieldSetTest extends TestCase
+class DetailsFieldSetTest extends TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new DetailsOptionsFieldSet();
+        $fieldSet = new DetailsFieldSet();
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\DetailsOptions', $fieldSet->getObject());
@@ -26,7 +26,7 @@ class DetailsOptionsFieldSetTest extends TestCase
     public function testInit()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactDetailsOptionsFieldSet');
+        $fieldSet = $sl->get('UthandoContactDetailsFieldSet');
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('name'));
@@ -43,7 +43,7 @@ class DetailsOptionsFieldSetTest extends TestCase
     public function testGetInputFilterConfig()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactDetailsOptionsFieldSet');
+        $fieldSet = $sl->get('UthandoContactDetailsFieldSet');
         $fieldSet->init();
         $spec = $fieldSet->getInputFilterSpecification();
 

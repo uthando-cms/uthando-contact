@@ -10,13 +10,13 @@
 
 namespace UthandoContactTest\Form;
 
-use UthandoContact\Form\GoogleMapOptionsFieldSet;
+use UthandoContact\Form\GoogleMapFieldSet;
 
-class GoogleMapOptionsFieldSetTest extends \PHPUnit_Framework_TestCase
+class GoogleMapFieldSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new GoogleMapOptionsFieldSet();
+        $fieldSet = new GoogleMapFieldSet();
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\GoogleMapOptions', $fieldSet->getObject());
@@ -24,7 +24,7 @@ class GoogleMapOptionsFieldSetTest extends \PHPUnit_Framework_TestCase
 
     public function testInit()
     {
-        $fieldSet = new GoogleMapOptionsFieldSet();
+        $fieldSet = new GoogleMapFieldSet();
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('latitude'));
@@ -35,7 +35,7 @@ class GoogleMapOptionsFieldSetTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInputFilterSpecification()
     {
-        $fieldSet = new GoogleMapOptionsFieldSet();
+        $fieldSet = new GoogleMapFieldSet();
         $spec = $fieldSet->getInputFilterSpecification();
 
         $this->assertArrayHasKey('latitude', $spec);

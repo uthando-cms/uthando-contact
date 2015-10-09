@@ -10,11 +10,11 @@ return [
     'form_elements' => [
         'invokables' => [
             'UthandoContact'                            => 'UthandoContact\Form\Contact',
-            'UthandoContactAddressLineFieldSet'         => 'UthandoContact\Form\AddressLineFieldSet',
-            'UthandoContactCompanyOptionsFieldSet'      => 'UthandoContact\Form\CompanyOptionsFieldSet',
-            'UthandoContactDetailsOptionsFieldSet'      => 'UthandoContact\Form\DetailsOptionsFieldSet',
-            'UthandoContactFormOptionsFieldSet'         => 'UthandoContact\Form\FormOptionsFieldSet',
-            'UthandoContactGoogleMapOptionsFieldSet'    => 'UthandoContact\Form\GoogleMapOptionsFieldSet',
+            'UthandoContactAbstractLineFieldSet'        => 'UthandoContact\Form\AbstractLineFieldSet',
+            'UthandoContactCompanyFieldSet'             => 'UthandoContact\Form\CompanyFieldSet',
+            'UthandoContactDetailsFieldSet'             => 'UthandoContact\Form\DetailsFieldSet',
+            'UthandoContactFormFieldSet'                => 'UthandoContact\Form\FormFieldSet',
+            'UthandoContactGoogleMapFieldSet'           => 'UthandoContact\Form\GoogleMapFieldSet',
             'UthandoContactSettings'                    => 'UthandoContact\Form\ContactSettings',
         ],
     ],
@@ -26,7 +26,8 @@ return [
     ],
     'view_helpers' => [
         'invokables' => [
-            'Contact' => 'UthandoContact\View\Contact',
+            'Contact'                       => 'UthandoContact\View\Contact',
+            'AbstractLineFormCollection'    => 'UthandoContact\Form\View\Helper\AbstractLineFormCollection',
         ],
     ],
     'view_manager'  => [

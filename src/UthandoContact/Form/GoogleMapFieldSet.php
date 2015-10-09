@@ -17,11 +17,11 @@ use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 /**
- * Class GoogleMapOptionsFieldSet
+ * Class GoogleMapFieldSet
  *
  * @package UthandoContact\Form
  */
-class GoogleMapOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
+class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     /**
      * @param null $name

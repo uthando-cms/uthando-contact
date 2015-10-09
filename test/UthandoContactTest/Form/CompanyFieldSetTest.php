@@ -11,14 +11,14 @@
 namespace UthandoContactTest\Form;
 
 
-use UthandoContact\Form\CompanyOptionsFieldSet;
+use UthandoContact\Form\CompanyFieldSet;
 use UthandoContactTest\Framework\TestCase;
 
-class CompanyOptionsFieldSetTest extends TestCase
+class CompanyFieldSetTest extends TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new CompanyOptionsFieldSet();
+        $fieldSet = new CompanyFieldSet();
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\CompanyOptions', $fieldSet->getObject());
@@ -27,7 +27,7 @@ class CompanyOptionsFieldSetTest extends TestCase
     public function testInit()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactCompanyOptionsFieldSet');
+        $fieldSet = $sl->get('UthandoContactCompanyFieldSet');
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('name'));
@@ -37,7 +37,7 @@ class CompanyOptionsFieldSetTest extends TestCase
 
     public function testGetInputFilterConfig()
     {
-        $fieldSet = new CompanyOptionsFieldSet();
+        $fieldSet = new CompanyFieldSet();
         $spec = $fieldSet->getInputFilterSpecification();
 
         $this->assertArrayHasKey('name', $spec);

@@ -17,7 +17,12 @@ use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class AddressLineFieldSet extends Fieldset implements InputFilterProviderInterface
+/**
+ * Class AbstractLineFieldSet
+ *
+ * @package UthandoContact\Form
+ */
+class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     /**
      * @param null $name

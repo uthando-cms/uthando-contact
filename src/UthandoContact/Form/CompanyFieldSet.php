@@ -17,11 +17,11 @@ use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 
 /**
- * Class CompanyOptionsFieldSet
+ * Class CompanyFieldSet
  *
  * @package UthandoContact\Form
  */
-class CompanyOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
+class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     /**
      * @param null $name
@@ -78,7 +78,7 @@ class CompanyOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 'should_create_template' => true,
                 'allow_add' => true,
                 'target_element' => [
-                    'type' => 'UthandoContactAddressLineFieldSet',
+                    'type' => 'UthandoContactAbstractLineFieldSet',
                 ],
             ],
             'attributes' => [

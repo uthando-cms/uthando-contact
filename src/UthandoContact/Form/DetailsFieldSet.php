@@ -17,7 +17,12 @@ use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInterface
+/**
+ * Class DetailsFieldSet
+ *
+ * @package UthandoContact\Form
+ */
+class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     /**
      * @param null $name
@@ -61,7 +66,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 'should_create_template' => true,
                 'allow_add' => true,
                 'target_element' => [
-                    'type' => 'UthandoContactAddressLineFieldSet',
+                    'type' => 'UthandoContactAbstractLineFieldSet',
                 ],
             ],
             'attributes' => [
@@ -74,6 +79,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
             'type'		=> 'UthandoCommonLibPhoneNumberCountryList',
             'options'	=> [
                 'label'	=> 'Phone Region',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'md-8',
                 'label_attributes' => [
                     'class' => 'col-md-4',
@@ -124,7 +130,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
             'name' => 'email',
             'type' => 'email',
             'options' => [
-                'label' => 'Phone No',
+                'label' => 'Email Address',
                 'column-size' => 'md-8',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'label_attributes' => [
@@ -145,7 +151,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 'should_create_template' => true,
                 'allow_add' => true,
                 'target_element' => [
-                    'type' => 'UthandoContactAddressLineFieldSet',
+                    'type' => 'UthandoContactAbstractLineFieldSet',
                 ],
             ],
             'attributes' => [
@@ -206,7 +212,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 ],
             ],
             'mobile' => [
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -222,7 +228,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 ],
             ],
             'fax' => [
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
@@ -248,7 +254,7 @@ class DetailsOptionsFieldSet extends Fieldset implements InputFilterProviderInte
                 ],
             ],
             'about_us_text' => [
-                'required' => true,
+                'required' => false,
                 'filters' => [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],

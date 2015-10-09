@@ -22,6 +22,50 @@ class ContactSettings extends Form
     public function init()
     {
         $this->add([
+            'type' => 'UthandoContactFormFieldSet',
+            'name' => 'form',
+            'options' => [
+                'label' => 'Form Options',
+            ],
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'UthandoContactDetailsFieldSet',
+            'name' => 'details',
+            'options' => [
+                'label' => 'Details',
+            ],
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'UthandoContactCompanyFieldSet',
+            'name' => 'company',
+            'options' => [
+                'label' => 'Company',
+            ],
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+        ]);
+
+        $this->add([
+            'type' => 'UthandoContactGoogleMapFieldSet',
+            'name' => 'google_map',
+            'options' => [
+                'label' => 'Google Map',
+            ],
+            'attributes' => [
+                'class' => 'col-md-6',
+            ],
+        ]);
+
+        $this->add([
             'name' => 'button-submit',
             'type' => 'submit',
             'attributes' => [

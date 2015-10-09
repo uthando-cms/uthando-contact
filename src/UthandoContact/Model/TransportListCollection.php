@@ -11,7 +11,6 @@
 namespace UthandoContact\Model;
 
 use UthandoCommon\Model\AbstractCollection;
-use UthandoCommon\Model\CollectionException;
 
 /**
  * Class TransportListCollection
@@ -47,7 +46,6 @@ class TransportListCollection extends AbstractCollection
     /**
      * @param $transportLine
      * @return $this
-     * @throws CollectionException
      */
     public function addTransportLine($transportLine)
     {

@@ -10,13 +10,13 @@
 
 namespace UthandoContactTest\Form;
 
-use UthandoContact\Form\AddressLineFieldSet;
+use UthandoContact\Form\AbstractLineFieldSet;
 
 class AddressLineFieldSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new AddressLineFieldSet();
+        $fieldSet = new AbstractLineFieldSet();
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Model\AbstractLine', $fieldSet->getObject());
@@ -24,7 +24,7 @@ class AddressLineFieldSetTest extends \PHPUnit_Framework_TestCase
 
     public function testInit()
     {
-        $fieldSet = new AddressLineFieldSet();
+        $fieldSet = new AbstractLineFieldSet();
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('label'));
@@ -33,7 +33,7 @@ class AddressLineFieldSetTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInputFilterSpecification()
     {
-        $fieldset = new AddressLineFieldSet();
+        $fieldset = new AbstractLineFieldSet();
         $spec = $fieldset->getInputFilterSpecification();
 
         $this->assertArrayHasKey('label', $spec);

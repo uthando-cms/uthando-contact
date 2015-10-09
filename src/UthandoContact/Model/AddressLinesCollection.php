@@ -11,7 +11,6 @@
 namespace UthandoContact\Model;
 
 use UthandoCommon\Model\AbstractCollection;
-use UthandoCommon\Model\CollectionException;
 
 /**
  * Class AddressLinesCollection
@@ -47,7 +46,6 @@ class AddressLinesCollection extends AbstractCollection
     /**
      * @param $addressLine
      * @return $this
-     * @throws CollectionException
      */
     public function addAddressLine($addressLine)
     {

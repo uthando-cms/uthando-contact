@@ -1,1 +1,205 @@
+<?php $this->HeadTitle('Contact Settings'); ?>
+<?php $this->layout()->pageTitle = 'Contact Settings'; ?>
+
+<?php
+$form = $this->form;
+$form->prepare();
+
+$companyOptions = $form->get('company');
+$detailsOptions = $form->get('details');
+$formOptions = $form->get('form');
+$googleMapOptions = $form->get('google_map');
+?>
+
+<?=$this->form(null, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($form);?>
+
+    <fieldset class="<?=$formOptions->getAttribute('class');?>">
+        <legend><?=$formOptions->getLabel();?></legend>
+        <?=$this->formRow($formOptions->get('name'));?>
+        <?=$this->formRow($formOptions->get('send_copy_to_sender'));?>
+        <?=$this->formRow($formOptions->get('enable_captcha'));?>
+        <?=$this->formRow($formOptions->get('enable_akismet'));?>
+
+        <div id="tansport-list" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <?=$formOptions->get('transport_list')->getLabel();?> (<?=$formOptions->get('transport_list')->count();?>)
+                    <button id="add-transport-list-button" class="btn btn-default btn-xs">
+                        Add Line
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-table">
+                <?php $this->abstractLineFormCollection()->setLineType('transport-list');?>
+                <?=$this->abstractLineFormCollection($formOptions->get('transport_list'), false);?>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="<?=$detailsOptions->getAttribute('class');?>">
+        <legend><?=$detailsOptions->getLabel();?></legend>
+        <?=$this->formRow($detailsOptions->get('name'));?>
+        <?=$this->formRow($detailsOptions->get('phone_region'));?>
+        <?=$this->formRow($detailsOptions->get('phone'));?>
+        <?=$this->formRow($detailsOptions->get('mobile'));?>
+        <?=$this->formRow($detailsOptions->get('fax'));?>
+        <?=$this->formRow($detailsOptions->get('email'));?>
+        <?=$this->formRow($detailsOptions->get('about_us_text'));?>
+
+        <div id="details-address" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <?=$detailsOptions->get('address')->getLabel();?> (<?=$detailsOptions->get('address')->count();?>)
+                    <button id="add-details-address-button" class="btn btn-default btn-xs">
+                        Add Line
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-table">
+                <?php $this->abstractLineFormCollection()->setLineType('details-address');?>
+                <?=$this->abstractLineFormCollection($detailsOptions->get('address'), false);?>
+            </div>
+        </div>
+
+        <div id="business-hours" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <?=$detailsOptions->get('business_hours')->getLabel();?> (<?=$detailsOptions->get('business_hours')->count();?>)
+                    <button id="add-business-hours-button" class="btn btn-default btn-xs">
+                        Add Line
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-table">
+                <?php $this->abstractLineFormCollection()->setLineType('business-hours');?>
+                <?=$this->abstractLineFormCollection($detailsOptions->get('business_hours'), false);?>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="<?=$companyOptions->getAttribute('class');?>">
+        <legend><?=$companyOptions->getLabel();?></legend>
+        <?=$this->formRow($companyOptions->get('name'));?>
+        <?=$this->formRow($companyOptions->get('number'));?>
+
+        <div id="company-address" class="panel panel-info">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <?=$companyOptions->get('address')->getLabel();?> (<?=$companyOptions->get('address')->count();?>)
+                    <button id="add-company-address-button" class="btn btn-default btn-xs">
+                        Add Line
+                    </button>
+                </h4>
+            </div>
+            <div class="panel-table">
+                <?php $this->abstractLineFormCollection()->setLineType('company-address');?>
+                <?=$this->abstractLineFormCollection($companyOptions->get('address'), false);?>
+            </div>
+        </div>
+
+    </fieldset>
+
+<?=$this->formCollection($googleMapOptions);?>
+
+<?=$this->formRow($form->get('button-submit'));?>
+
+<?=$this->form()->closeTag();?>
+
+<div class="clearfix"></div>
+
+<script type="text/javascript">
+    $('#add-transport-list-button').on('click', function(e){
+        e.preventDefault();
+        var transportListTemplate = $('#transport-list-template').data('template');
+        var currentCount = $('#transport-list-table tr').length;
+        transportListTemplate = transportListTemplate.replace(/__index__/g, currentCount);
+        transportListTemplate = transportListTemplate.replace(/__text__/g, '');
+        transportListTemplate = transportListTemplate.replace(/__label__/g, '');
+        if (currentCount == 0) {
+            $('#transport-list-table').html(transportListTemplate);
+
+        } else {
+            $('#transport-list-table tr:last').after(transportListTemplate);
+        }
+
+    });
+
+    $( "#transport-list-table" ).on( "click", ".delete-row", function(e) {
+        e.preventDefault();
+        var row = $(this).parent().parent();
+        row.remove();
+    });
+
+    $('#add-details-address-button').on('click', function(e){
+        e.preventDefault();
+        var detailsAddressTemplate = $('#details-address-template').data('template');
+        var currentCount = $('#details-address-table tr').length;
+        detailsAddressTemplate = detailsAddressTemplate.replace(/__index__/g, currentCount);
+        detailsAddressTemplate = detailsAddressTemplate.replace(/__text__/g, '');
+        detailsAddressTemplate = detailsAddressTemplate.replace(/__label__/g, '');
+        if (currentCount == 0) {
+            $('#details-address-table').html(detailsAddressTemplate);
+
+        } else {
+            $('#details-address-table tr:last').after(detailsAddressTemplate);
+        }
+
+    });
+
+    $( "#details-address-table" ).on( "click", ".delete-row", function(e) {
+        e.preventDefault();
+        var row = $(this).parent().parent();
+        row.remove();
+    });
+
+    $('#add-business-hours-button').on('click', function(e){
+        e.preventDefault();
+        var businessHoursTemplate = $('#business-hours-template').data('template');
+        var currentCount = $('#business-hours-table tr').length;
+        businessHoursTemplate = businessHoursTemplate.replace(/__index__/g, currentCount);
+        businessHoursTemplate = businessHoursTemplate.replace(/__text__/g, '');
+        businessHoursTemplate = businessHoursTemplate.replace(/__label__/g, '');
+        if (currentCount == 0) {
+            $('#business-hours-table').html(businessHoursTemplate);
+
+        } else {
+            $('#business-hours-table tr:last').after(businessHoursTemplate);
+        }
+
+    });
+
+    $( "#business-hours-table" ).on( "click", ".delete-row", function(e) {
+        e.preventDefault();
+        var row = $(this).parent().parent();
+        row.remove();
+    });
+
+    $('#add-company-address-button').on('click', function(e){
+        e.preventDefault();
+        var companyAddressTemplate = $('#company-address-template').data('template');
+        var currentCount = $('#company-address-table tr').length;
+        companyAddressTemplate = companyAddressTemplate.replace(/__index__/g, currentCount);
+        companyAddressTemplate = companyAddressTemplate.replace(/__text__/g, '');
+        companyAddressTemplate = companyAddressTemplate.replace(/__label__/g, '');
+        if (currentCount == 0) {
+            $('#company-address-table').html(companyAddressTemplate);
+
+        } else {
+            $('#company-address-table tr:last').after(companyAddressTemplate);
+        }
+
+    });
+
+    $( "#company-address-table" ).on( "click", ".delete-row", function(e) {
+        e.preventDefault();
+        var row = $(this).parent().parent();
+        row.remove();
+    });
+</script>
 

@@ -11,7 +11,6 @@
 namespace UthandoContact\Model;
 
 use UthandoCommon\Model\AbstractCollection;
-use UthandoCommon\Model\CollectionException;
 
 /**
  * Class BusinessHoursCollection
@@ -47,7 +46,6 @@ class BusinessHoursCollection extends AbstractCollection
     /**
      * @param $hourLine
      * @return $this
-     * @throws CollectionException
      */
     public function addBusinessHourLine($hourLine)
     {
