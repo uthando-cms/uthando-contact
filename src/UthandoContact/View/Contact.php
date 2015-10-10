@@ -87,9 +87,11 @@ class Contact extends AbstractViewHelper
     }
 
     /**
-     * @return string
+     * @param $address
+     * @param bool|false $newLines
+     * @return mixed|string
      */
-    public function formatAddress($address)
+    public function formatAddress($address, $newLines = false)
     {
         $address    = $this->get($address);
         $html       = '';
@@ -98,6 +100,12 @@ class Contact extends AbstractViewHelper
             $html .= $line['text'] . ', ';
         }
 
-        return rtrim($html, ', ');
+        $html = rtrim($html, ', ');
+
+        if (true === $newLines) {
+            $html = str_replace(',', '<br />', $html);
+        }
+
+        return $html;
     }
 }
