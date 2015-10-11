@@ -11,8 +11,10 @@
 
 namespace UthandoContact\View;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Config\Config;
+use Zend\Form\FormElementManager;
 
 /**
  * Class Contact
@@ -69,6 +71,29 @@ class Contact extends AbstractViewHelper
         }
 
         return $returnValue;
+    }
+
+    /**
+     * @return \UthandoMail\Form\Element\MailTransportList
+     */
+    public function getTransportSelect()
+    {
+        /* @var FormElementManager $formManager */
+        $formManager = $this->getServiceLocator()
+            ->getServiceLocator()
+            ->get('FormElementManager');
+        $select = $formManager->get('UthandoMailTransportList');
+        $select->setName('transport_options');
+        $select->setOptions([
+            'label'	=> 'Email',
+            'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+            'column-size' => 'md-10',
+            'label_attributes' => [
+                'class' => 'col-md-2',
+            ],
+        ]);
+        $select->setAttribute('id', 'mail-transport-select');
+        return $select;
     }
 
     /**

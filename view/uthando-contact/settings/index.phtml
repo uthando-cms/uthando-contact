@@ -13,30 +13,48 @@ $googleMapOptions = $form->get('google_map');
 
 <?=$this->form(null, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($form);?>
 
-    <fieldset class="<?=$formOptions->getAttribute('class');?>">
-        <legend><?=$formOptions->getLabel();?></legend>
-        <?=$this->formRow($formOptions->get('name'));?>
-        <?=$this->formRow($formOptions->get('send_copy_to_sender'));?>
-        <?=$this->formRow($formOptions->get('enable_captcha'));?>
-        <?=$this->formRow($formOptions->get('enable_akismet'));?>
+<fieldset class="<?=$formOptions->getAttribute('class');?>">
+    <legend><?=$formOptions->getLabel();?></legend>
+    <?=$this->formRow($formOptions->get('name'));?>
+    <?=$this->formRow($formOptions->get('send_copy_to_sender'));?>
+    <?=$this->formRow($formOptions->get('enable_captcha'));?>
+    <?=$this->formRow($formOptions->get('enable_akismet'));?>
 
-        <div id="tansport-list" class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <?=$formOptions->get('transport_list')->getLabel();?> (<?=$formOptions->get('transport_list')->count();?>)
-                    <button id="add-transport-list-button" class="btn btn-default btn-xs">
-                        Add Line
-                    </button>
-                </h4>
-            </div>
-            <div class="panel-table">
-                <?php $this->abstractLineFormCollection()->setLineType('transport-list');?>
-                <?=$this->abstractLineFormCollection($formOptions->get('transport_list'), false);?>
+    <div id="tansport-list" class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <?=$formOptions->get('transport_list')->getLabel();?> (<?=$formOptions->get('transport_list')->count();?>)
+                <button id="add-transport-list-button" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#mail-transport-list-model">
+                    Add Line
+                </button>
+            </h4>
+        </div>
+        <div class="panel-table">
+            <?php $this->abstractLineFormCollection()->setLineType('transport-list');?>
+            <?=$this->abstractLineFormCollection($formOptions->get('transport_list'), false);?>
+        </div>
+    </div>
+
+    <div id="mail-transport-list-model" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Chose a Email Address to Add</h4>
+                </div>
+                <div class="modal-body">
+                    <?=$this->formRow($this->contact()->getTransportSelect());?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="mail-transport-save" type="button" class="btn btn-primary">Add</button>
+                </div>
             </div>
         </div>
+    </div>
 
-    </fieldset>
+</fieldset>
 
     <fieldset class="<?=$detailsOptions->getAttribute('class');?>">
         <legend><?=$detailsOptions->getLabel();?></legend>
@@ -114,18 +132,36 @@ $googleMapOptions = $form->get('google_map');
 <div class="clearfix"></div>
 
 <script type="text/javascript">
-    $('#add-transport-list-button').on('click', function(e){
+    $('#mail-transport-save').on('click', function(e){
         e.preventDefault();
         var transportListTemplate = $('#transport-list-template').data('template');
         var currentCount = $('#transport-list-table tr').length;
+
         transportListTemplate = transportListTemplate.replace(/__index__/g, currentCount);
         transportListTemplate = transportListTemplate.replace(/__text__/g, '');
         transportListTemplate = transportListTemplate.replace(/__label__/g, '');
+
+        var inputLabel = $('#mail-transport-select').val();
+        var inputText = $('#mail-transport-select option:selected').text().replace(/<.*>/g, '');
+
+        console.log(inputText);
+
+        var html = $($.parseHTML(transportListTemplate));
+        var rows = html.children();
+
+        $(rows[0]).html(inputLabel);
+        $(rows[1]).html(inputText);
+
+        var inputs = $(rows[2]).find('input');
+
+        $(inputs[0]).val(inputLabel);
+        $(inputs[1]).val(inputText);
+
         if (currentCount == 0) {
-            $('#transport-list-table').html(transportListTemplate);
+            $('#transport-list-table').html(html);
 
         } else {
-            $('#transport-list-table tr:last').after(transportListTemplate);
+            $('#transport-list-table tr:last').after(html);
         }
 
     });
