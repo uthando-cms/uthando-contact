@@ -11,7 +11,7 @@
 
 namespace UthandoContact\Mvc\Controller;
 
-use UthandoContact\Service\Contact;
+use UthandoContact\Service\ContactService;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -45,7 +45,7 @@ class ContactController extends AbstractActionController
             return $this->redirect()->toRoute('contact');
         }
 
-        /* @var Contact $service */
+        /* @var ContactService $service */
         $service = $this->getServiceLocator()->get('UthandoContact\Service\Contact');
 
         $form = $service->getContactForm($this->params()->fromPost());

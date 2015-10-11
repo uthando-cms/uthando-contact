@@ -10,7 +10,7 @@
 
 namespace UthandoContactTest\Mvc\Controller;
 
-use UthandoContact\Form\Contact;
+use UthandoContact\Form\ContactForm;
 use UthandoContactTest\Framework\ApplicationTestCase;
 use Zend\Http\Header\Referer;
 
@@ -36,11 +36,11 @@ class ContactControllerTest extends ApplicationTestCase
 
     public function testValidProcessAction()
     {
-        $contactServiceMock = $this->getMockBuilder('UthandoContact\Service\Contact')
+        $contactServiceMock = $this->getMockBuilder('UthandoContact\ServiceManager\ContactService')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $formMock = $this->getMockBuilder('UthandoContact\Form\Contact')
+        $formMock = $this->getMockBuilder('UthandoContact\Form\ContactForm')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -53,9 +53,14 @@ class ContactControllerTest extends ApplicationTestCase
             ->will($this->returnValue($formMock));
 
         $serviceManager = $this->getApplicationServiceLocator();
+
+        $formElementManager = $serviceManager->get('FormElementManager');
+        $formElementManager->setAllowOverride(true);
+        $formElementManager->setService('UthandoContact', $formMock);
+
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService('UthandoContact\Service\Contact', $contactServiceMock);
-        $serviceManager->setService('UthandoContact\Form\Contact', $formMock);
+
 
 
         $this->dispatch('/contact/process', 'POST', $this->postData);

@@ -4,12 +4,12 @@ return [
     'controllers' => [
         'invokables' => [
             'UthandoContact\Controller\Contact'     => 'UthandoContact\Mvc\Controller\ContactController',
-            'UthandoContact\Controller\Settings'    => 'UthandoContact\Mvc\Controller\Settings',
+            'UthandoContact\Controller\Settings'    => 'UthandoContact\Mvc\Controller\SettingsController',
         ],
     ],
     'form_elements' => [
         'invokables' => [
-            'UthandoContact'                            => 'UthandoContact\Form\Contact',
+            'UthandoContact'                            => 'UthandoContact\Form\ContactForm',
             'UthandoContactAbstractLineFieldSet'        => 'UthandoContact\Form\AbstractLineFieldSet',
             'UthandoContactCompanyFieldSet'             => 'UthandoContact\Form\CompanyFieldSet',
             'UthandoContactDetailsFieldSet'             => 'UthandoContact\Form\DetailsFieldSet',
@@ -18,15 +18,19 @@ return [
             'UthandoContactSettings'                    => 'UthandoContact\Form\ContactSettings',
         ],
     ],
+    'input_filters' => [
+        'invokables' => [
+            'UthandoContact\InputFilter\Contact' => 'UthandoContact\InputFilter\ContactInputFilter',
+        ],
+    ],
     'service_manager' => [
         'invokables'    => [
-            'UthandoContact\InputFilter\Contact'    => 'UthandoContact\InputFilter\Contact',
-            'UthandoContact\Service\Contact'        => 'UthandoContact\Service\Contact',
+            'UthandoContact\Service\Contact' => 'UthandoContact\ServiceManager\ContactService',
         ],
     ],
     'view_helpers' => [
         'invokables' => [
-            'Contact'                       => 'UthandoContact\View\Contact',
+            'Contact'                       => 'UthandoContact\View\Helper\Contact',
             'AbstractLineFormCollection'    => 'UthandoContact\Form\View\Helper\AbstractLineFormCollection',
         ],
     ],
@@ -73,7 +77,7 @@ return [
     'navigation' => [
         'default' => [
             'contact' => [
-                'label' => 'Contact',
+                'label' => 'ContactService',
                 'route' => 'contact',
             ],
         ],

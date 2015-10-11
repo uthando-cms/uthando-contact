@@ -15,11 +15,11 @@ use Zend\InputFilter\InputFilter;
 use Zend\Validator\Hostname as HostnameValidator;
 
 /**
- * Class Contact
+ * Class ContactInputFilter
  *
  * @package UthandoContact\InputFilter
  */
-class Contact extends InputFilter
+class ContactInputFilter extends InputFilter
 {
     /**
      * Set up elements

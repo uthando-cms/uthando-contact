@@ -23,7 +23,7 @@ class ContactTest extends TestCase
 
     public function testSendMail()
     {
-        $formMock = $this->getMockBuilder('UthandoContact\Form\Contact')
+        $formMock = $this->getMockBuilder('UthandoContact\Form\ContactForm')
             ->disableOriginalConstructor()
             ->getMock();
 

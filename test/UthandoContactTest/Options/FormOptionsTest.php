@@ -26,8 +26,8 @@ class FormOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function testSetGetName()
     {
-        $this->model->setName('Contact Form');
-        $this->assertSame('Contact Form', $this->model->getName());
+        $this->model->setName('ContactService Form');
+        $this->assertSame('ContactService Form', $this->model->getName());
     }
 
     public function testSetGetTransportList()

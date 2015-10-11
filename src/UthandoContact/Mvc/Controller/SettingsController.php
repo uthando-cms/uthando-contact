@@ -14,11 +14,11 @@ use UthandoCommon\Controller\SettingsTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
- * Class Settings
+ * Class SettingsController
  *
  * @package UthandoContact\Mvc\Controller
  */
-class Settings extends AbstractActionController
+class SettingsController extends AbstractActionController
 {
     use SettingsTrait;
 

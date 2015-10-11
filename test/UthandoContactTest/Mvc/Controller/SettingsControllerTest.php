@@ -20,7 +20,7 @@ class SettingsControllerTest extends TestCase
         $controller = $this->serviceManager->get('ControllerManager')
             ->get('UthandoContact\Controller\Settings');
 
-        $this->assertInstanceOf('UthandoContact\Mvc\Controller\Settings', $controller);
+        $this->assertInstanceOf('UthandoContact\Mvc\Controller\SettingsController', $controller);
         $this->assertSame('UthandoContactSettings', $controller->getFormName());
         $this->assertSame('uthando_contact', $controller->getConfigKey());
     }

@@ -14,11 +14,11 @@ namespace UthandoContact\Form;
 use Zend\Form\Form;
 
 /**
- * Class Contact
+ * Class ContactForm
  *
  * @package UthandoContact\Form
  */
-class Contact extends Form
+class ContactForm extends Form
 {
     /**
      * @param null $name
@@ -79,6 +79,14 @@ class Contact extends Form
                 'placeholder' => 'Subject',
                 'class' => 'form-control',
                 'required' => true
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'transport',
+            'type' => 'select',
+            'options' => [
+
             ],
         ]);
 

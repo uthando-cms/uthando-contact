@@ -11,13 +11,13 @@
 namespace UthandoContactTest\InputFilter;
 
 
-use UthandoContact\InputFilter\Contact;
+use UthandoContact\InputFilter\ContactInputFilter;
 
 class ContactTest extends \PHPUnit_Framework_TestCase
 {
     public function testInit()
     {
-        $inputFilter = new Contact();
+        $inputFilter = new ContactInputFilter();
         $inputFilter->init();
 
         $this->assertTrue($inputFilter->has('name'));

@@ -9,19 +9,19 @@
  * @license   see LICENSE
  */
 
-namespace UthandoContact\Service;
+namespace UthandoContact\ServiceManager;
 
 use UthandoCommon\Service\AbstractService;
-use UthandoContact\Form\Contact as ContactForm;
-use UthandoContact\InputFilter\Contact as ContactInputFilter;
+use UthandoContact\Form\ContactForm as ContactForm;
+use UthandoContact\InputFilter\ContactInputFilter as ContactInputFilter;
 use Zend\Form\Form;
 
 /**
- * Class Contact
+ * Class ContactService
  *
  * @package UthandoContact\Service
  */
-class Contact extends AbstractService
+class ContactService extends AbstractService
 {
     /**
      * @param $data
@@ -34,7 +34,7 @@ class Contact extends AbstractService
         }
 
         //$from    = $data['email'];
-        $subject = '[Contact Form] ' . $data['subject'];
+        $subject = '[ContactService Form] ' . $data['subject'];
         //$body    = $data['body'];
 
         $data = [
@@ -60,11 +60,12 @@ class Contact extends AbstractService
     {
         $sl = $this->getServiceLocator();
         $formManager = $sl->get('FormElementManager');
+        $inputFilterManager = $sl->get('InputFilterManager');
         /* @var ContactInputFilter $inputFilter */
-        $inputFilter = $sl->get('UthandoContact\InputFilter\Contact');
+        $inputFilter = $inputFilterManager->get('UthandoContact\InputFilter\Contact');
 
         /* @var ContactForm $form */
-        $form = $formManager->get('UthandoContact\Form\Contact');
+        $form = $formManager->get('UthandoContact');
         $form->setInputFilter($inputFilter);
         $form->init();
 
