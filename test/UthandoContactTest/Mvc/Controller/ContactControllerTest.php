@@ -26,7 +26,6 @@ class ContactControllerTest extends ApplicationTestCase
     public function testIndexAction()
     {
         $this->dispatch('/contact');
-
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('UthandoContact');
         $this->assertControllerName('UthandoContact\Controller\Contact');
@@ -61,8 +60,6 @@ class ContactControllerTest extends ApplicationTestCase
         $serviceManager->setAllowOverride(true);
         $serviceManager->setService('UthandoContact\Service\Contact', $contactServiceMock);
 
-
-
         $this->dispatch('/contact/process', 'POST', $this->postData);
 
         $this->assertResponseStatusCode(302);
@@ -96,7 +93,7 @@ class ContactControllerTest extends ApplicationTestCase
     {
         /* @var \Zend\Http\Headers $headers */
         $headers = $this->getRequest()->getHeaders();
-        $headers->addHeaderLine('referer', '/contact/process');
+        $headers->addHeaderLine('referer', '/contact');
         $this->getRequest()->setHeaders($headers);
 
         $this->dispatch('/contact/thank-you');

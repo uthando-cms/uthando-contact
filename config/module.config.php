@@ -24,6 +24,10 @@ return [
         ],
     ],
     'service_manager' => [
+        'factories' => [
+            'UthandoContact\Options\DetailsOptions' => 'UthandoContact\ServiceManager\DetailsOptionsFactory',
+            'UthandoContact\Options\FormOptions'    => 'UthandoContact\ServiceManager\FormOptionsFactory',
+        ],
         'invokables'    => [
             'UthandoContact\Service\Contact' => 'UthandoContact\ServiceManager\ContactService',
         ],

@@ -52,7 +52,7 @@ class ContactController extends AbstractActionController
 
         if (!$form->isValid()) {
             $this->flashMessenger()->addInfoMessage(
-                'There were one or more isues with your submission. Please correct them as indicated below.'
+                'There were one or more issues with your submission. Please correct them as indicated below.'
             );
 
             $model = new ViewModel([
@@ -78,7 +78,7 @@ class ContactController extends AbstractActionController
         $headers = $this->getRequest()->getHeaders();
 
         if (!$headers->has('Referer')
-            || !preg_match('#/contact/process$#', $headers->get('Referer')->getFieldValue())
+            || !preg_match('#/contact$#', $headers->get('Referer')->getFieldValue())
         ) {
             return $this->redirect()->toRoute('contact');
         }

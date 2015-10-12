@@ -22,5 +22,7 @@ return array(
     'UthandoContact\Options\FormOptions'                         => __DIR__ . '/src/UthandoContact/Options/FormOptions.php',
     'UthandoContact\Options\GoogleMapOptions'                    => __DIR__ . '/src/UthandoContact/Options/GoogleMapOptions.php',
     'UthandoContact\ServiceManager\ContactService'               => __DIR__ . '/src/UthandoContact/ServiceManager/ContactService.php',
+    'UthandoContact\ServiceManager\DetailsOptionsFactory'        => __DIR__ . '/src/UthandoContact/ServiceManager/DetailsOptionsFactory.php',
+    'UthandoContact\ServiceManager\FormOptionsFactory'           => __DIR__ . '/src/UthandoContact/ServiceManager/FormOptionsFactory.php',
     'UthandoContact\View\Helper\Contact'                         => __DIR__ . '/src/UthandoContact/View/Helper/Contact.php',
 );

@@ -12,8 +12,10 @@
 namespace UthandoContact\ServiceManager;
 
 use UthandoCommon\Service\AbstractService;
-use UthandoContact\Form\ContactForm as ContactForm;
-use UthandoContact\InputFilter\ContactInputFilter as ContactInputFilter;
+use UthandoContact\Form\ContactForm;
+use UthandoContact\InputFilter\ContactInputFilter;
+use UthandoContact\Options\DetailsOptions;
+use UthandoContact\Options\FormOptions;
 use Zend\Form\Form;
 
 /**
@@ -24,6 +26,11 @@ use Zend\Form\Form;
 class ContactService extends AbstractService
 {
     /**
+     * @var FormOptions
+     */
+    protected $formOptions;
+
+    /**
      * @param $data
      * @return bool
      */
@@ -33,21 +40,35 @@ class ContactService extends AbstractService
             $data = $data->getData();
         }
 
-        //$from    = $data['email'];
-        $subject = '[ContactService Form] ' . $data['subject'];
-        //$body    = $data['body'];
+        $formOptions = $this->getFormOptions();
+        $detailsOptions = $this->getDetailsOptions();
 
-        $data = [
+        $this->getEventManager()->trigger('mail.send', $this, [
             'sender' => [
                 'name' => $data['name'],
                 'address' => $data['email']
             ],
             'body' => $data['body'],
-            'subject' => $subject,
-            'transport' => 'webmaster',
-        ];
+            'subject' => '[Contact Form] ' . $data['subject'],
+            'transport' => $data['transport'],
+        ]);
 
-        $this->getEventManager()->trigger('mail.send', $this, $data);
+        if ($formOptions->getSendCopyToSender()) {
+            $respondMessage = "Dear " . $data['name'] . ",<br /><br />We thank you for your enquiry and we will get back to you as soon as possible.<br /><br />" . $detailsOptions->getName();
+            $respondMessage .= "<br /><br /> Here is a copy of your enquiry, for your records:<br /><br />";
+            $respondMessage .= $data['body'];
+
+            $this->getEventManager()->trigger('mail.send', $this, [
+                'recipient' => [
+                    'name' => $data['name'],
+                    'address' => $data['email']
+                ],
+
+                'body' => $respondMessage,
+                'subject' => '[ContactService Form] ' . $data['subject'],
+                'transport' => $data['transport'],
+            ]);
+        }
 
         return true;
     }
@@ -63,9 +84,14 @@ class ContactService extends AbstractService
         $inputFilterManager = $sl->get('InputFilterManager');
         /* @var ContactInputFilter $inputFilter */
         $inputFilter = $inputFilterManager->get('UthandoContact\InputFilter\Contact');
+        $formOptions = $this->getFormOptions();
 
         /* @var ContactForm $form */
-        $form = $formManager->get('UthandoContact');
+        $form = $formManager->get('UthandoContact', [
+            'name'              => $formOptions->getName(),
+            'enable_captcha'    => $formOptions->getEnableCaptcha(),
+            'transport_list'    => $formOptions->getTransportList(),
+        ]);
         $form->setInputFilter($inputFilter);
         $form->init();
 
@@ -74,5 +100,23 @@ class ContactService extends AbstractService
         }
 
         return $form;
+    }
+
+    /**
+     * @return FormOptions
+     */
+    public function getFormOptions()
+    {
+        $sl = $this->getServiceLocator();
+        return $sl->get('UthandoContact\Options\FormOptions');
+    }
+
+    /**
+     * @return DetailsOptions
+     */
+    public function getDetailsOptions()
+    {
+        $sl = $this->getServiceLocator();
+        return $sl->get('UthandoContact\Options\DetailsOptions');
     }
 }

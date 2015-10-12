@@ -11,6 +11,7 @@
 
 namespace UthandoContact\Form;
 
+use UthandoContact\Model\AbstractLine;
 use Zend\Form\Form;
 
 /**
@@ -23,9 +24,15 @@ class ContactForm extends Form
     /**
      * @param null $name
      * @param array $options
+     * list-unstyled note note-error
      */
     public function __construct($name = null, $options = [])
     {
+        if (isset($options['name'])) {
+            $name = $options['name'];
+            unset($options['name']);
+        }
+
         parent::__construct($name, $options);
     }
 
@@ -34,23 +41,15 @@ class ContactForm extends Form
      */
     public function init()
     {
-
-        if (null === $this->getName()) {
-            $this->setName('contact');
-        }
-
         $this->add([
             'name' => 'name',
             'type' => 'text',
             'attributes' => [
-                'placeholder' => 'Full name',
-                'required' => true,
+                'placeholder' => 'Full Name',
                 'autofocus' => true,
-                'class' => 'form-control',
             ],
             'options' => [
-                'label' => 'Name:',
-                'required' => true
+                'label' => 'Name *',
             ],
         ]);
 
@@ -59,12 +58,9 @@ class ContactForm extends Form
             'type' => 'email',
             'attributes' => [
                 'placeholder' => 'Email Address',
-                'class' => 'form-control',
-                'required' => true
             ],
             'options' => [
-                'label' => 'Email:',
-                'required' => true
+                'label' => 'Email *',
             ],
         ]);
 
@@ -72,13 +68,10 @@ class ContactForm extends Form
             'name' => 'subject',
             'type' => 'text',
             'options' => [
-                'label' => 'Subject:',
-                'required' => true
+                'label' => 'Subject *',
             ],
             'attributes' => [
                 'placeholder' => 'Subject',
-                'class' => 'form-control',
-                'required' => true
             ],
         ]);
 
@@ -86,7 +79,8 @@ class ContactForm extends Form
             'name' => 'transport',
             'type' => 'select',
             'options' => [
-
+                'label' => 'Department',
+                'value_options' => $this->getTransportList(),
             ],
         ]);
 
@@ -94,33 +88,58 @@ class ContactForm extends Form
             'name' => 'body',
             'type' => 'textarea',
             'options' => [
-                'label' => 'Your Message:',
-                'required' => true
+                'label' => 'Message *',
             ],
             'attributes' => [
                 'placeholder' => 'Your message',
-                'required' => true,
-                'class' => 'form-control',
                 'rows' => 10,
             ],
         ]);
 
-        $this->add([
-            'name' => 'captcha',
-            'type' => 'UthandoCommonCaptcha',
-            'attributes' => [
-                'placeholder' => 'Type letters and number here',
-                'required' => true,
-                'class' => 'form-control',
-            ],
-            'options' => [
-                'label' => 'Please verify you are human.'
-            ],
-        ]);
+        if (true === $this->getOption('enable_captcha')) {
+            $this->add([
+                'name' => 'captcha',
+                'type' => 'UthandoCommonCaptcha',
+                'attributes' => [
+                    'placeholder' => 'Type letters and number here',
+                ],
+                'options' => [
+                    'label' => 'Please verify you are human *'
+                ],
+            ]);
+        }
 
         $this->add([
             'name' => 'csrf',
             'type' => 'csrf',
         ]);
+
+        $this->add([
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => [
+                'class' => 'btn btn-primary btn-lg',
+                'data-loading-text' => 'Please wait...'
+            ],
+            'options' => [
+                'label' => 'Send',
+            ]
+        ]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTransportList()
+    {
+        $list           = $this->getOption('transport_list');
+        $listOptions    = [];
+
+        /*  @var AbstractLine $transport */
+        foreach($list as $transport) {
+            $listOptions[$transport->getLabel()] = $transport->getText();
+        }
+
+        return$listOptions;
     }
 }

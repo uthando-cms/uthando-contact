@@ -18,6 +18,7 @@ class ContactTest extends TestCase
         'name' => 'Joe Blogs',
         'email' => 'joe@blogs.com',
         'subject' => 'test',
+        'transport' => 'default',
         'body' => 'test message',
     ];
 

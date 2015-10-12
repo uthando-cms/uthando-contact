@@ -30,13 +30,18 @@ class ContactInputFilter extends InputFilter
             'name' => 'name',
             'required' => true,
             'filters' => [
-                ['name' => 'StripTags']
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
             ],
         ]);
-        
+
         $this->add([
             'name' => 'email',
             'required' => true,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
             'validators' => [
                 ['name' => 'EmailAddress', 'options' => [
                     'allow' => HostnameValidator::ALLOW_DNS,
@@ -44,25 +49,29 @@ class ContactInputFilter extends InputFilter
                 ]],
             ],
         ]);
-    
+
         $this->add([
-            'name'       => 'subject',
-            'required'   => true,
-            'filters'    => [
-                ['name'    => 'StripTags'],
+            'name' => 'subject',
+            'required' => true,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
             ],
             'validators' => [
-                ['name'    => 'StringLength', 'options' => [
+                ['name' => 'StringLength', 'options' => [
                     'encoding' => 'UTF-8',
-                    'min'      => 2,
-                    'max'      => 140,
+                    'min' => 2,
+                    'max' => 140,
                 ]],
             ],
         ]);
-        
+
         $this->add([
             'name' => 'body',
-            'required' => true
+            'required' => true,
+            'filters' => [
+                ['name' => 'StripTags'],
+            ],
         ]);
     }
 }

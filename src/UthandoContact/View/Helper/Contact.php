@@ -11,15 +11,20 @@
 
 namespace UthandoContact\View\Helper;
 
+use libphonenumber\PhoneNumber;
+use libphonenumber\PhoneNumberFormat;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoCommon\I18n\View\Helper\LibPhoneNumber;
 use UthandoCommon\View\AbstractViewHelper;
 use Zend\Config\Config;
 use Zend\Form\FormElementManager;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
  * Class ContactService
  *
  * @package UthandoContact\View
+ * @method PhpRenderer getView()
  */
 class Contact extends AbstractViewHelper
 {
@@ -27,6 +32,16 @@ class Contact extends AbstractViewHelper
      * @var Config
      */
     protected $contactConfig;
+
+    /**
+     * @var PhoneNumber
+     */
+    protected $phoneNumber;
+
+    /**
+     * @var LibPhoneNumber
+     */
+    protected $libPhoneNumberHelper;
 
     /**
      * @param null $key
@@ -71,6 +86,32 @@ class Contact extends AbstractViewHelper
         }
 
         return $returnValue;
+    }
+
+    /**
+     * @param bool|false $localise
+     * @return null|string|Config
+     */
+    public function formatPhoneNumber($localise = false)
+    {
+        $phoneNumber        = $this->get('details.phone');
+        $region             = $this->get('details.phone_region');
+        $format             = (true === $localise) ? PhoneNumberFormat::NATIONAL : PhoneNumberFormat::E164;
+        $phoneNumberHelper  = $this->getLibPhoneNumberHelper();
+
+        return $phoneNumberHelper($phoneNumber, $region, $format);
+    }
+
+    /**
+     * @return LibPhoneNumber
+     */
+    public function getLibPhoneNumberHelper()
+    {
+        if (!$this->libPhoneNumberHelper instanceof LibPhoneNumber) {
+            $this->libPhoneNumberHelper = $this->getView()->plugin('LibPhoneNumber');
+        }
+
+        return $this->libPhoneNumberHelper;
     }
 
     /**
