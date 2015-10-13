@@ -2,10 +2,10 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoDomPdf\Form\View\Helper
+ * @package   UthandoContact\Form\View\Helper
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoContact\Form\View\Helper;
@@ -17,9 +17,9 @@ use Zend\Form\Element\Collection;
 use Zend\Form\ElementInterface;
 
 /**
- * Class PdfTextLineFormCollection
+ * Class AbstractLineFormCollection
  *
- * @package UthandoDomPdf\Form\View\Helper
+ * @package UthandoContact\Form\View\Helper
  * @method TwbBundleFormRow getElementHelper()
  */
 class AbstractLineFormCollection extends TwbBundleFormCollection
@@ -90,18 +90,17 @@ class AbstractLineFormCollection extends TwbBundleFormCollection
         if ($oElement instanceof Collection) {
             $c = 0;
 
-            foreach ($oElement as $key => $oElementOrFieldset) {
-                $oElementHelper = $this->getElementHelper();
+            foreach ($oElement as $key => $oElementOrFieldSet) {
                 $oFieldSetHelper = $this->getFieldsetHelper();
 
-                if ($oElementOrFieldset instanceof AbstractLineFieldSet) {
+                if ($oElementOrFieldSet instanceof AbstractLineFieldSet) {
                     $format = str_replace('__index__', $key, $this->rowWrap);
-                    $format = str_replace('__label__', $oElementOrFieldset->get('label')->getValue(), $format);
-                    $format = str_replace('__text__', $oElementOrFieldset->get('text')->getValue(), $format);
+                    $format = str_replace('__label__', $oElementOrFieldSet->get('label')->getValue(), $format);
+                    $format = str_replace('__text__', $oElementOrFieldSet->get('text')->getValue(), $format);
                     $html .= sprintf(
                         $format,
                         $this->getLineType(),
-                        $oFieldSetHelper($oElementOrFieldset, false),
+                        $oFieldSetHelper($oElementOrFieldSet, false),
                         ucfirst($this->getLineType())
                     );
                 }
@@ -131,19 +130,18 @@ class AbstractLineFormCollection extends TwbBundleFormCollection
      */
     public function renderTemplate(Collection $collection)
     {
-        $elementHelper = $this->getElementHelper();
         $escapeHtmlAttribHelper = $this->getEscapeHtmlAttrHelper();
-        $fieldsetHelper = $this->getFieldsetHelper();
+        $fieldSetHelper = $this->getFieldsetHelper();
 
         $templateMarkup = '';
 
-        $elementOrFieldset = $collection->getTemplateElement();
+        $elementOrFieldSet = $collection->getTemplateElement();
 
-        if ($elementOrFieldset instanceof AbstractLineFieldSet) {
+        if ($elementOrFieldSet instanceof AbstractLineFieldSet) {
             $templateMarkup .= sprintf(
                 $this->rowWrap,
                 $this->getLineType(),
-                $fieldsetHelper($elementOrFieldset, $this->shouldWrap()),
+                $fieldSetHelper($elementOrFieldSet, $this->shouldWrap()),
                 ucfirst($this->getLineType())
             );
         }

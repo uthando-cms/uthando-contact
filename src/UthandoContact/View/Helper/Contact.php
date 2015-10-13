@@ -169,7 +169,7 @@ class Contact extends AbstractViewHelper
         $html = rtrim($html, ', ');
 
         if (true === $newLines) {
-            $html = str_replace(',', '<br />', $html);
+            $html = str_replace(',', '<br>', $html);
         }
 
         return $html;
