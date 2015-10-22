@@ -118,6 +118,7 @@ class ContactForm extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
+                'id' => 'contact-submit-button',
                 'class' => 'btn btn-primary btn-lg',
                 'data-loading-text' => 'Please wait...'
             ],

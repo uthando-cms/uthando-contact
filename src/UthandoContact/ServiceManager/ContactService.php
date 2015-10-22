@@ -17,6 +17,7 @@ use UthandoContact\InputFilter\ContactInputFilter;
 use UthandoContact\Options\DetailsOptions;
 use UthandoContact\Options\FormOptions;
 use Zend\Form\Form;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class ContactService
@@ -41,22 +42,28 @@ class ContactService extends AbstractService
         }
 
         $formOptions = $this->getFormOptions();
-        $detailsOptions = $this->getDetailsOptions();
+
+        $emailView = new ViewModel([
+            'data' => $data,
+        ]);
+
+        $emailView->setTemplate('uthando-contact/email-template/default-content');
 
         $this->getEventManager()->trigger('mail.send', $this, [
             'sender' => [
-                'name' => $data['name'],
-                'address' => $data['email']
+                'name'      => $data['name'],
+                'address'   => $data['email']
             ],
-            'body' => $data['body'],
-            'subject' => '[Contact Form] ' . $data['subject'],
-            'transport' => $data['transport'],
+            'layout'            => 'uthando-contact/email-template/default-layout',
+            'layout_params'     => [],
+            'body'              => $emailView,
+            'subject'           => '[Contact Form] ' . $data['subject'],
+            'transport'         => $data['transport'],
         ]);
 
         if ($formOptions->getSendCopyToSender()) {
-            $respondMessage = "Dear " . $data['name'] . ",<br /><br />We thank you for your enquiry and we will get back to you as soon as possible.<br /><br />" . $detailsOptions->getName();
-            $respondMessage .= "<br /><br /> Here is a copy of your enquiry, for your records:<br /><br />";
-            $respondMessage .= $data['body'];
+
+            $emailView->setTemplate('uthando-contact/email-template/default-sender-copy');
 
             $this->getEventManager()->trigger('mail.send', $this, [
                 'recipient' => [
@@ -64,7 +71,9 @@ class ContactService extends AbstractService
                     'address' => $data['email']
                 ],
 
-                'body' => $respondMessage,
+                'layout'            => 'uthando-contact/email-template/default-layout',
+                'layout_params'     => [],
+                'body'              => $emailView,
                 'subject' => '[ContactService Form] ' . $data['subject'],
                 'transport' => $data['transport'],
             ]);
