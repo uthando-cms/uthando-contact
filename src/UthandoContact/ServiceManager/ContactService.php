@@ -119,13 +119,4 @@ class ContactService extends AbstractService
         $sl = $this->getServiceLocator();
         return $sl->get('UthandoContact\Options\FormOptions');
     }
-
-    /**
-     * @return DetailsOptions
-     */
-    public function getDetailsOptions()
-    {
-        $sl = $this->getServiceLocator();
-        return $sl->get('UthandoContact\Options\DetailsOptions');
-    }
 }

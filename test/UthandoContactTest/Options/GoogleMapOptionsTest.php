@@ -47,4 +47,10 @@ class GoogleMapOptionsTest extends \PHPUnit_Framework_TestCase
         $this->model->setColor('greyscale');
         $this->assertSame('greyscale', $this->model->getColor());
     }
+
+    public function testGetSetShowMap()
+    {
+        $this->model->setShowMap(false);
+        $this->assertFalse($this->model->getShowMap());
+    }
 }

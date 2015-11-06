@@ -31,6 +31,7 @@ class GoogleMapFieldSetTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($fieldSet->has('longitude'));
         $this->assertTrue($fieldSet->has('zoom'));
         $this->assertTrue($fieldSet->has('color'));
+        $this->assertTrue($fieldSet->has('show_map'));
     }
 
     public function testGetInputFilterSpecification()
@@ -42,5 +43,6 @@ class GoogleMapFieldSetTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('longitude', $spec);
         $this->assertArrayHasKey('zoom', $spec);
         $this->assertArrayHasKey('color', $spec);
+        $this->assertArrayHasKey('show_map', $spec);
     }
 }

@@ -41,6 +41,20 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
     public function init()
     {
         $this->add([
+            'name'			=> 'show_map',
+            'type'			=> 'checkbox',
+            'options'		=> [
+                'label'			=> 'Show Map',
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'required' 		=> false,
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-8 col-sm-offset-4',
+            ],
+        ]);
+
+        $this->add([
             'name' => 'latitude',
             'type' => 'text',
             'options' => [
@@ -103,6 +117,15 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
+            'show_map' => [
+                'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => 'StripTags'],
+                    ['name' => 'StringTrim'],
+                    ['name' => 'Boolean'],
+                ],
+            ],
             'latitude' => [
                 'required' => false,
                 'filters' => [

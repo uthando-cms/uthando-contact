@@ -32,12 +32,17 @@ class GoogleMapOptions extends AbstractOptions
     /**
      * @var int
      */
-    protected $zoom;
+    protected $zoom = 18;
 
     /**
      * @var string
      */
-    protected $color;
+    protected $color = 'color';
+
+    /**
+     * @var bool
+     */
+    protected $showMap = true;
 
     /**
      * @return string
@@ -108,6 +113,24 @@ class GoogleMapOptions extends AbstractOptions
     public function setColor($color)
     {
         $this->color = $color;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getShowMap()
+    {
+        return $this->showMap;
+    }
+
+    /**
+     * @param boolean $showMap
+     * @return $this
+     */
+    public function setShowMap($showMap)
+    {
+        $this->showMap = $showMap;
         return $this;
     }
 }
