@@ -22,10 +22,8 @@
     "php": ">=7.0",
     "zendframework/zend-form": "2.*",
     "zendframework/zend-inputfilter": "2.*",
-    "zendframework/zend-mail": "2.*",
     "uthando-cms/uthando-common": "2.*",
-    "uthando-cms/uthando-admin": "1.*",
-    "uthando-cms/uthando-mail": "1.*",
+    "uthando-cms/uthando-mail": "2.*",
     "giggsey/libphonenumber-for-php": "7.*"
   },
   "require-dev": {
