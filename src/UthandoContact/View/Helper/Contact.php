@@ -89,12 +89,13 @@ class Contact extends AbstractViewHelper
     }
 
     /**
+     * @param string $type
      * @param bool|false $localise
      * @return null|string|Config
      */
-    public function formatPhoneNumber($localise = false)
+    public function formatPhoneNumber($type, $localise = false)
     {
-        $phoneNumber        = $this->get('details.phone');
+        $phoneNumber        = $this->get('details.' . $type);
         $region             = $this->get('details.phone_region');
         $format             = (true === $localise) ? PhoneNumberFormat::NATIONAL : PhoneNumberFormat::E164;
         $phoneNumberHelper  = $this->getLibPhoneNumberHelper();
