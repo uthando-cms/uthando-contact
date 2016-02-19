@@ -1,5 +1,20 @@
 <?php $this->HeadTitle('Contact Settings'); ?>
-<?php $this->layout()->pageTitle = 'Contact Settings'; ?>
+<?php $this->layout()->pageTitle = $this->translate('Contact Settings'); ?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<button type="submit" form="form-contact" data-toggle="tooltip" title="<?=$this->translate('Save');?>" class="btn btn-primary">
+    <i class="fa fa-save"></i>
+</button>
+<a href="<?=$this->url('admin');?>" type="submit" form="form-contact" data-toggle="tooltip" title="<?=$this->translate('Cancel');?>" class="btn btn-default">
+    <i class="fa fa-reply"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'id' => 'form-contact',
+    'action' => $this->url('admin/contact'),
+]); ?>
 
 <?php
 $form = $this->form;
@@ -11,125 +26,123 @@ $formOptions = $form->get('form');
 $googleMapOptions = $form->get('google_map');
 ?>
 
-<?=$this->form(null, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($form);?>
-
-<fieldset class="<?=$formOptions->getAttribute('class');?>">
-    <legend><?=$formOptions->getLabel();?></legend>
-    <?=$this->formRow($formOptions->get('name'));?>
-    <?=$this->formRow($formOptions->get('send_copy_to_sender'));?>
-    <?=$this->formRow($formOptions->get('enable_captcha'));?>
-    <?=$this->formRow($formOptions->get('enable_akismet'));?>
-
-    <div id="tansport-list" class="panel panel-info">
-        <!-- Default panel contents -->
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <?=$formOptions->get('transport_list')->getLabel();?> (<?=$formOptions->get('transport_list')->count();?>)
-                <button id="add-transport-list-button" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#mail-transport-list-model">
-                    Add Line
-                </button>
-            </h4>
-        </div>
-        <div class="panel-table">
-            <?php $this->abstractLineFormCollection()->setLineType('transport-list');?>
-            <?=$this->abstractLineFormCollection($formOptions->get('transport_list'), false);?>
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-cog"></i> <?=$this->translate('Contact Settings');?></h3>
     </div>
+    <div class="panel-body">
+        <?=$this->form(null, \TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL)->openTag($form);?>
+            <fieldset class="<?=$formOptions->getAttribute('class');?>">
+            <legend><?=$formOptions->getLabel();?></legend>
+            <?=$this->formRow($formOptions->get('name'));?>
+            <?=$this->formRow($formOptions->get('send_copy_to_sender'));?>
+            <?=$this->formRow($formOptions->get('enable_captcha'));?>
+            <?=$this->formRow($formOptions->get('enable_akismet'));?>
 
-    <div id="mail-transport-list-model" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Chose a Email Address to Add</h4>
+            <div id="tansport-list" class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <?=$formOptions->get('transport_list')->getLabel();?> (<?=$formOptions->get('transport_list')->count();?>)
+                        <button id="add-transport-list-button" class="btn btn-default btn-xs" type="button" data-toggle="modal" data-target="#mail-transport-list-model">
+                            Add Line
+                        </button>
+                    </h4>
                 </div>
-                <div class="modal-body">
-                    <?=$this->formRow($this->contact()->getTransportSelect());?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="mail-transport-save" type="button" class="btn btn-primary">Add</button>
+                <div class="panel-table">
+                    <?php $this->abstractLineFormCollection()->setLineType('transport-list');?>
+                    <?=$this->abstractLineFormCollection($formOptions->get('transport_list'), false);?>
                 </div>
             </div>
-        </div>
+
+            <div id="mail-transport-list-model" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Chose a Email Address to Add</h4>
+                        </div>
+                        <div class="modal-body">
+                            <?=$this->formRow($this->contact()->getTransportSelect());?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="mail-transport-save" type="button" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+            <fieldset class="<?=$detailsOptions->getAttribute('class');?>">
+            <legend><?=$detailsOptions->getLabel();?></legend>
+            <?=$this->formRow($detailsOptions->get('name'));?>
+            <?=$this->formRow($detailsOptions->get('phone_region'));?>
+            <?=$this->formRow($detailsOptions->get('phone'));?>
+            <?=$this->formRow($detailsOptions->get('mobile'));?>
+            <?=$this->formRow($detailsOptions->get('fax'));?>
+            <?=$this->formRow($detailsOptions->get('email'));?>
+            <?=$this->formRow($detailsOptions->get('about_us_text'));?>
+
+            <div id="details-address" class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <?=$detailsOptions->get('address')->getLabel();?> (<?=$detailsOptions->get('address')->count();?>)
+                        <button id="add-details-address-button" class="btn btn-default btn-xs">
+                            Add Line
+                        </button>
+                    </h4>
+                </div>
+                <div class="panel-table">
+                    <?php $this->abstractLineFormCollection()->setLineType('details-address');?>
+                    <?=$this->abstractLineFormCollection($detailsOptions->get('address'), false);?>
+                </div>
+            </div>
+
+            <div id="business-hours" class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <?=$detailsOptions->get('business_hours')->getLabel();?> (<?=$detailsOptions->get('business_hours')->count();?>)
+                        <button id="add-business-hours-button" class="btn btn-default btn-xs">
+                            Add Line
+                        </button>
+                    </h4>
+                </div>
+                <div class="panel-table">
+                    <?php $this->abstractLineFormCollection()->setLineType('business-hours');?>
+                    <?=$this->abstractLineFormCollection($detailsOptions->get('business_hours'), false);?>
+                </div>
+            </div>
+
+        </fieldset>
+            <fieldset class="<?=$companyOptions->getAttribute('class');?>">
+            <legend><?=$companyOptions->getLabel();?></legend>
+            <?=$this->formRow($companyOptions->get('name'));?>
+            <?=$this->formRow($companyOptions->get('number'));?>
+
+            <div id="company-address" class="panel panel-info">
+                <!-- Default panel contents -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <?=$companyOptions->get('address')->getLabel();?> (<?=$companyOptions->get('address')->count();?>)
+                        <button id="add-company-address-button" class="btn btn-default btn-xs">
+                            Add Line
+                        </button>
+                    </h4>
+                </div>
+                <div class="panel-table">
+                    <?php $this->abstractLineFormCollection()->setLineType('company-address');?>
+                    <?=$this->abstractLineFormCollection($companyOptions->get('address'), false);?>
+                </div>
+            </div>
+
+        </fieldset>
+            <?=$this->formCollection($googleMapOptions);?>
+        <?=$this->form()->closeTag();?>
     </div>
-
-</fieldset>
-
-    <fieldset class="<?=$detailsOptions->getAttribute('class');?>">
-        <legend><?=$detailsOptions->getLabel();?></legend>
-        <?=$this->formRow($detailsOptions->get('name'));?>
-        <?=$this->formRow($detailsOptions->get('phone_region'));?>
-        <?=$this->formRow($detailsOptions->get('phone'));?>
-        <?=$this->formRow($detailsOptions->get('mobile'));?>
-        <?=$this->formRow($detailsOptions->get('fax'));?>
-        <?=$this->formRow($detailsOptions->get('email'));?>
-        <?=$this->formRow($detailsOptions->get('about_us_text'));?>
-
-        <div id="details-address" class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <?=$detailsOptions->get('address')->getLabel();?> (<?=$detailsOptions->get('address')->count();?>)
-                    <button id="add-details-address-button" class="btn btn-default btn-xs">
-                        Add Line
-                    </button>
-                </h4>
-            </div>
-            <div class="panel-table">
-                <?php $this->abstractLineFormCollection()->setLineType('details-address');?>
-                <?=$this->abstractLineFormCollection($detailsOptions->get('address'), false);?>
-            </div>
-        </div>
-
-        <div id="business-hours" class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <?=$detailsOptions->get('business_hours')->getLabel();?> (<?=$detailsOptions->get('business_hours')->count();?>)
-                    <button id="add-business-hours-button" class="btn btn-default btn-xs">
-                        Add Line
-                    </button>
-                </h4>
-            </div>
-            <div class="panel-table">
-                <?php $this->abstractLineFormCollection()->setLineType('business-hours');?>
-                <?=$this->abstractLineFormCollection($detailsOptions->get('business_hours'), false);?>
-            </div>
-        </div>
-
-    </fieldset>
-
-    <fieldset class="<?=$companyOptions->getAttribute('class');?>">
-        <legend><?=$companyOptions->getLabel();?></legend>
-        <?=$this->formRow($companyOptions->get('name'));?>
-        <?=$this->formRow($companyOptions->get('number'));?>
-
-        <div id="company-address" class="panel panel-info">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <?=$companyOptions->get('address')->getLabel();?> (<?=$companyOptions->get('address')->count();?>)
-                    <button id="add-company-address-button" class="btn btn-default btn-xs">
-                        Add Line
-                    </button>
-                </h4>
-            </div>
-            <div class="panel-table">
-                <?php $this->abstractLineFormCollection()->setLineType('company-address');?>
-                <?=$this->abstractLineFormCollection($companyOptions->get('address'), false);?>
-            </div>
-        </div>
-
-    </fieldset>
-
-<?=$this->formCollection($googleMapOptions);?>
-
-<?=$this->formRow($form->get('button-submit'));?>
-
-<?=$this->form()->closeTag();?>
-
-<div class="clearfix"></div>
+</div>
 
 <script type="text/javascript">
     $('#mail-transport-save').on('click', function(e){

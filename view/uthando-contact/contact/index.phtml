@@ -1,76 +1,16 @@
-<?php $this->headTitle('ContactService Us') ?>
-<div class="row">
-    <form class="col-md-12 form-horizontal"  method="post" action="<?=$this->url('contact/process') ?>">
-    	<fieldset>
-    		<legend>Contact Form</legend>
-    	</fieldset>
-    	
-    	<div class="form-group<?php if ($this->form->get('name')->getMessages()) echo ' has-error'; ?>">
-            <label class="col-md-2 control-label" for="name">Name:</label>
-            <div class="col-md-6">
-                <?=$this->formInput($this->form->get('name')->setAttribute('class', 'form-control')); ?>
-                <span class="help-block">
-                <?=$this->formElementErrors($this->form->get('name'), [
-                    'class' => 'list-unstyled'
-                ]); ?>
-                </span>
-            </div>
-        </div>
-        
-        <div class="form-group<?php if ($this->form->get('email')->getMessages()) echo ' has-error'; ?>">
-            <label class="col-md-2 control-label" for="email">Email:</label>
-            <div class="col-md-6">
-                <?=$this->formInput($this->form->get('email')->setAttribute('class', 'form-control')); ?>
-                <span class="help-block">
-                <?=$this->formElementErrors($this->form->get('email'), [
-                    'class' => 'list-unstyled'
-                ]); ?>
-                </span>
-            </div>
-        </div>
-        
-        <div class="form-group<?php if ($this->form->get('subject')->getMessages()) echo ' has-error'; ?>">
-            <label class="col-md-2 control-label" for="subject">Subject:</label>
-            <div class="col-md-6">
-                <?=$this->formInput($this->form->get('subject')->setAttribute('class', 'form-control')); ?>
-                <span class="help-block">
-                <?=$this->formElementErrors($this->form->get('subject'), [
-                    'class' => 'list-unstyled'
-                ]); ?>
-                </span>
-            </div>
-        </div>
-        
-        <div class="form-group<?php if ($this->form->get('body')->getMessages()) echo ' has-error'; ?>">
-            <label class="col-md-2 control-label" for="body">Message:</label>
-            <div class="col-md-6">
-                <?=$this->formTextarea($this->form->get('body')->setAttribute('class', 'form-control')); ?>
-                <span class="help-block">
-                <?=$this->formElementErrors($this->form->get('body'), [
-                    'class' => 'list-unstyled'
-                ]); ?>
-                </span>
-            </div>
-        </div>
-        
-        <div class="form-group<?php if ($this->form->get('captcha')->getMessages()) echo ' has-error'; ?>">
-            <label class="col-md-2 control-label" for="captcha">Please verify you are human.</label>
-            <div class="col-md-6">
-                <?=$this->formCaptcha($this->form->get('captcha')->setAttribute('class', 'form-control')); ?>
-                <span class="help-block">
-                <?=$this->formElementErrors($this->form->get('captcha'), [
-                    'class' => 'list-unstyled'
-                ]); ?>
-                </span>
-            </div>
-        </div>
-    	
-    	 <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-            	<?=$this->formElement($this->form->get('csrf')); ?>
-                <button type="submit" class="btn btn-primary" 
-                data-loading-text="Please wait...">Send</button>
-            </div>
-        </div>
-    </form>
+<?php $this->headTitle('Contact Us') ?>
+
+<?php $this->form->setAttributes([
+    'method' => 'post',
+    'action' => $this->url('contact/process'),
+]); ?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><?=$this->translate('Contact Us');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->form($this->form);?>
+    </div>
 </div>
+

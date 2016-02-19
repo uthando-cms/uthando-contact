@@ -11,6 +11,7 @@
 
 namespace UthandoContact\Form;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoContact\Model\AbstractLine;
 use Zend\Form\Form;
 
@@ -24,7 +25,6 @@ class ContactForm extends Form
     /**
      * @param null $name
      * @param array $options
-     * list-unstyled note note-error
      */
     public function __construct($name = null, $options = [])
     {
@@ -49,7 +49,12 @@ class ContactForm extends Form
                 'autofocus' => true,
             ],
             'options' => [
-                'label' => 'Name *',
+                'label' => 'Name',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -60,7 +65,12 @@ class ContactForm extends Form
                 'placeholder' => 'Email Address',
             ],
             'options' => [
-                'label' => 'Email *',
+                'label' => 'Email',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -68,7 +78,12 @@ class ContactForm extends Form
             'name' => 'subject',
             'type' => 'text',
             'options' => [
-                'label' => 'Subject *',
+                'label' => 'Subject',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'Subject',
@@ -81,6 +96,11 @@ class ContactForm extends Form
             'options' => [
                 'label' => 'Department',
                 'value_options' => $this->getTransportList(),
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
         ]);
 
@@ -88,7 +108,12 @@ class ContactForm extends Form
             'name' => 'body',
             'type' => 'textarea',
             'options' => [
-                'label' => 'Message *',
+                'label' => 'Message',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'Your message',
@@ -104,7 +129,12 @@ class ContactForm extends Form
                     'placeholder' => 'Type letters and number here',
                 ],
                 'options' => [
-                    'label' => 'Please verify you are human *'
+                    'label' => 'Please verify you are human',
+                    'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                    'column-size' => 'sm-10 col-sm-offset-2',
+                    'label_attributes' => [
+                        'class' => 'col-sm-10 col-sm-offset-2',
+                    ],
                 ],
             ]);
         }
@@ -119,11 +149,12 @@ class ContactForm extends Form
             'type' => 'submit',
             'attributes' => [
                 'id' => 'contact-submit-button',
-                'class' => 'btn btn-primary btn-lg',
-                'data-loading-text' => 'Please wait...'
+                'class' => 'btn btn-primary',
             ],
             'options' => [
                 'label' => 'Send',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10 col-sm-offset-2',
             ]
         ]);
     }
