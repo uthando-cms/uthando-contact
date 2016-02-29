@@ -28,7 +28,8 @@ class ContactForm extends Form
      */
     public function __construct($name = null, $options = [])
     {
-        if (isset($options['name'])) {
+        if (is_array($name)) {
+            $options = $name;
             $name = $options['name'];
             unset($options['name']);
         }
