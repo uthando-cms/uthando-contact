@@ -10,7 +10,7 @@ return [
     'form_elements' => [
         'invokables' => [
             'UthandoContact'                            => 'UthandoContact\Form\ContactForm',
-            'UthandoContactAbstractLineFieldSet'        => 'UthandoContact\Form\AbstractLineFieldSet',
+            'UthandoContact\Form\AbstractLineFieldSet'  => 'UthandoContact\Form\AbstractLineFieldSet',
             'UthandoContactCompanyFieldSet'             => 'UthandoContact\Form\CompanyFieldSet',
             'UthandoContactDetailsFieldSet'             => 'UthandoContact\Form\DetailsFieldSet',
             'UthandoContactFormFieldSet'                => 'UthandoContact\Form\FormFieldSet',
