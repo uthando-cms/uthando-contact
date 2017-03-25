@@ -16,10 +16,13 @@ class GoogleMapFieldSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new GoogleMapFieldSet();
+        $fieldSet = new GoogleMapFieldSet([
+            'name' => 'googlemap-fieldset',
+        ]);
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\GoogleMapOptions', $fieldSet->getObject());
+        $this->assertSame('googlemap-fieldset', $fieldSet->getName());
     }
 
     public function testInit()

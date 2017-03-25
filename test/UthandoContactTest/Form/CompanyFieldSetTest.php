@@ -18,10 +18,13 @@ class CompanyFieldSetTest extends TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new CompanyFieldSet();
+        $fieldSet = new CompanyFieldSet([
+            'name' => 'company-fieldset',
+        ]);
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\CompanyOptions', $fieldSet->getObject());
+        $this->assertSame('company-fieldset', $fieldSet->getName());
     }
 
     public function testInit()

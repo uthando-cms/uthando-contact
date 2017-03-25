@@ -163,7 +163,7 @@ class ContactForm extends Form
     /**
      * @return array
      */
-    public function getTransportList()
+    public function getTransportList(): array
     {
         $list           = $this->getOption('transport_list');
         $listOptions    = [];
@@ -173,6 +173,6 @@ class ContactForm extends Form
             $listOptions[$transport->getLabel()] = $transport->getText();
         }
 
-        return$listOptions;
+        return $listOptions;
     }
 }

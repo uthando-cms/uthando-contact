@@ -32,7 +32,7 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
     {
         if (is_array($name)) {
             $options = $name;
-            $name = (isset($options['name'])) ? $options['name'] : null;
+            $name = $options['name'] ?? null;
         }
         
         parent::__construct($name, $options);
@@ -76,7 +76,7 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
     /**
      * @return array
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'label' => [

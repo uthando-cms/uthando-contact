@@ -16,10 +16,13 @@ class AddressLineFieldSetTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new AbstractLineFieldSet();
+        $fieldSet = new AbstractLineFieldSet([
+            'name' => 'abstract-line',
+        ]);
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Model\AbstractLine', $fieldSet->getObject());
+        $this->assertSame('abstract-line', $fieldSet->getName());
     }
 
     public function testInit()

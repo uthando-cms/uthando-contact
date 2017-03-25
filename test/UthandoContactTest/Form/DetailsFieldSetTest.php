@@ -17,10 +17,13 @@ class DetailsFieldSetTest extends TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new DetailsFieldSet();
+        $fieldSet = new DetailsFieldSet([
+            'name' => 'details-fieldset',
+        ]);
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\DetailsOptions', $fieldSet->getObject());
+        $this->assertSame('details-fieldset', $fieldSet->getName());
     }
 
     public function testInit()

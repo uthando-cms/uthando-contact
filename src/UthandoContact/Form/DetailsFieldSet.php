@@ -181,7 +181,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
     /**
      * @return array
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         $countryCode = $this->get('phone_region')->getValue();
 

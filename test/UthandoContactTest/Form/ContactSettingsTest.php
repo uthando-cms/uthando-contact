@@ -10,6 +10,7 @@
 
 namespace UthandoContactTest\Form;
 
+use UthandoContact\Form\ContactForm;
 use UthandoContactTest\Framework\TestCase;
 
 class ContactSettingsTest extends TestCase
@@ -25,5 +26,14 @@ class ContactSettingsTest extends TestCase
         $this->assertTrue($fieldSet->has('company'));
         $this->assertTrue($fieldSet->has('google_map'));
         $this->assertTrue($fieldSet->has('button-submit'));
+    }
+
+    public function testConstructorSetsNameFromOptions()
+    {
+        $fieldSet = new ContactForm([
+            'name' => 'contact-form',
+        ]);
+
+        $this->assertSame('contact-form', $fieldSet->getName());
     }
 }

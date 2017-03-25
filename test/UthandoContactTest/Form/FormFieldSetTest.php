@@ -17,10 +17,13 @@ class FormFieldSetTest extends TestCase
 {
     public function testConstructor()
     {
-        $fieldSet = new FormFieldSet();
+        $fieldSet = new FormFieldSet([
+            'name' => 'form-fieldset',
+        ]);
 
         $this->assertInstanceOf('Zend\Hydrator\ClassMethods', $fieldSet->getHydrator());
         $this->assertInstanceOf('UthandoContact\Options\FormOptions', $fieldSet->getObject());
+        $this->assertSame('form-fieldset', $fieldSet->getName());
     }
 
     public function testInit()

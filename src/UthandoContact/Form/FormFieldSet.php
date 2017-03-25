@@ -172,7 +172,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
     /**
      * @return array
      */
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'name' => [

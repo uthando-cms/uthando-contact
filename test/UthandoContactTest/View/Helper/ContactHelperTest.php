@@ -59,10 +59,10 @@ class ContactHelperTest extends ApplicationTestCase
     public function testFormatPhoneNumber()
     {
         $contactHelper = $this->getContactViewHelper();
-        $localised = $contactHelper()->formatPhoneNumber(true);
+        $localised = $contactHelper()->formatPhoneNumber('phone', true);
         $this->assertSame('01234 123456', $localised->__toString());
 
-        $national = $contactHelper()->formatPhoneNumber();
+        $national = $contactHelper()->formatPhoneNumber('phone');
         $this->assertSame('+441234123456', $national->__toString());
     }
 
