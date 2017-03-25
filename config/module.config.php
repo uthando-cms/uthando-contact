@@ -3,8 +3,8 @@
 return [
     'controllers' => [
         'invokables' => [
-            'UthandoContact\Controller\Contact'     => 'UthandoContact\Mvc\Controller\ContactController',
-            'UthandoContact\Controller\Settings'    => 'UthandoContact\Mvc\Controller\SettingsController',
+            'UthandoContact\Controller\Contact'     => \UthandoContact\Mvc\Controller\ContactController::class,
+            'UthandoContact\Controller\Settings'    => \UthandoContact\Mvc\Controller\SettingsController::class,
         ],
     ],
     'form_elements' => [
@@ -19,8 +19,8 @@ return [
         ],
     ],
     'input_filters' => [
-        'invokables' => [
-            'UthandoContact\InputFilter\Contact' => 'UthandoContact\InputFilter\ContactInputFilter',
+        'factories' => [
+            'UthandoContact\InputFilter\Contact' => \UthandoContact\InputFilter\ContactInputFilterFactory::class,
         ],
     ],
     'service_manager' => [
