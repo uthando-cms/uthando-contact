@@ -3,3 +3,9 @@ languages:
   PHP: true
 exclude_paths:
   - test/*
+engines:
+  :
+    enabled: true
+    exclude_fingerprints:
+    - 590bc482b9677c08186c530caab2a096
+    - 91dee8c55bf9a53fa19aafb79f5bb5e6
