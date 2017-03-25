@@ -7,5 +7,12 @@ engines:
   :
     enabled: true
     exclude_fingerprints:
-    - 590bc482b9677c08186c530caab2a096
-    - 91dee8c55bf9a53fa19aafb79f5bb5e6
+      - 590bc482b9677c08186c530caab2a096
+      - 91dee8c55bf9a53fa19aafb79f5bb5e6
+      - 91ede0bda0ef86e27c55b0cf078654e1
+      - 077187244549bb6e9357657ac2b6108c
+      - a92e181b9eec85981f3e0a32db2848a8
+      - f3338dbe6eb143c8fcfeadba34492303
+      - f6d64ff4dbcbfc142986aaffc4710cba
+      - cdc36e17b31d5ee69189fa6180577cb1
+      - 90e47f5cb086f7f9c1c1d9d8b864d9c0
