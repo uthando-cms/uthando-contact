@@ -26,7 +26,7 @@ return [
         'factories' => [
             FormOptions::class    => FormOptionsFactory::class,
         ],
-        'invokables'    => [
+        'invokables' => [
             ContactService::class => ContactService::class,
         ],
     ],
