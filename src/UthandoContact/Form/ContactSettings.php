@@ -22,7 +22,7 @@ class ContactSettings extends Form
     public function init()
     {
         $this->add([
-            'type' => 'UthandoContactFormFieldSet',
+            'type' => FormFieldSet::class,
             'name' => 'form',
             'options' => [
                 'label' => 'Form Options',
@@ -33,7 +33,7 @@ class ContactSettings extends Form
         ]);
 
         $this->add([
-            'type' => 'UthandoContactDetailsFieldSet',
+            'type' => DetailsFieldSet::class,
             'name' => 'details',
             'options' => [
                 'label' => 'Details',
@@ -44,7 +44,7 @@ class ContactSettings extends Form
         ]);
 
         $this->add([
-            'type' => 'UthandoContactCompanyFieldSet',
+            'type' => CompanyFieldSet::class,
             'name' => 'company',
             'options' => [
                 'label' => 'Company',
@@ -55,26 +55,13 @@ class ContactSettings extends Form
         ]);
 
         $this->add([
-            'type' => 'UthandoContactGoogleMapFieldSet',
+            'type' => GoogleMapFieldSet::class,
             'name' => 'google_map',
             'options' => [
                 'label' => 'Google Map',
             ],
             'attributes' => [
                 'class' => 'col-md-6',
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'button-submit',
-            'type' => 'submit',
-            'attributes' => [
-                'type' => 'submit',
-                'class' => 'btn-primary'
-            ],
-            'options' => [
-                'label' => 'Save',
-                'column-size' => 'md-6'
             ],
         ]);
     }

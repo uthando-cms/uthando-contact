@@ -53,7 +53,7 @@ class ContactInputFilterTest extends TestCase
     public function testAkismetFilterSet()
     {
         $sl = $this->serviceManager->get('InputFilterManager');
-        $inputFilter = $sl->get('UthandoContact\InputFilter\Contact');
+        $inputFilter = $sl->get(ContactInputFilter::class);
         $inputFilter->setAkismetEnabled(true);
         $inputFilter->setAkismetOptions($this->akismetOptions);
         $inputFilter->init();

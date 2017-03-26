@@ -12,6 +12,7 @@ namespace UthandoContactTest\View\Helper;
 
 use UthandoContact\View\Helper\Contact;
 use UthandoContactTest\Framework\ApplicationTestCase;
+use UthandoMail\Form\Element\MailTransportList;
 use Zend\Form\Element\Select;
 
 class ContactHelperTest extends ApplicationTestCase
@@ -74,7 +75,7 @@ class ContactHelperTest extends ApplicationTestCase
 
         $mockFormElementManager->expects($this->once())
             ->method('get')
-            ->with('UthandoMailTransportList')
+            ->with(MailTransportList::class)
             ->willReturn(new Select());
         $this->getApplicationServiceLocator()->setAllowOverride(true);
         $this->getApplicationServiceLocator()->setService('FormElementManager', $mockFormElementManager);

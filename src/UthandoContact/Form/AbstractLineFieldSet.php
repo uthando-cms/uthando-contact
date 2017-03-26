@@ -10,12 +10,15 @@
 
 namespace UthandoContact\Form;
 
-
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoContact\Model\AbstractLine;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
 /**
  * Class AbstractLineFieldSet
@@ -48,7 +51,7 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
     {
         $this->add([
             'name' => 'label',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Label',
                 'column-size' => 'md-8',
@@ -61,7 +64,7 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
 
         $this->add([
             'name' => 'text',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Text',
                 'column-size' => 'md-8',
@@ -82,11 +85,11 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
             'label' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -96,11 +99,11 @@ class AbstractLineFieldSet extends Fieldset implements InputFilterProviderInterf
             'text' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,

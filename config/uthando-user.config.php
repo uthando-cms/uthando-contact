@@ -8,7 +8,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoContact\Controller\Contact' => ['action' => 'all'],
+                                \UthandoContact\Mvc\Controller\ContactController::class => ['action' => 'all'],
                             ],
                         ],
                     ],
@@ -17,15 +17,15 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoContact\Controller\Settings' => ['action' => 'all'],
+                                \UthandoContact\Mvc\Controller\SettingsController::class => ['action' => 'all'],
                             ],
                         ],
                     ],
                 ],
             ],
             'resources' => [
-                'UthandoContact\Controller\Contact',
-                'UthandoContact\Controller\Settings',
+                \UthandoContact\Mvc\Controller\ContactController::class,
+                \UthandoContact\Mvc\Controller\SettingsController::class,
             ],
         ],
     ],

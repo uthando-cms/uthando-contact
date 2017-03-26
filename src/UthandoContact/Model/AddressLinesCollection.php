@@ -23,7 +23,7 @@ class AddressLinesCollection extends AbstractCollection
     /**
      * @var string
      */
-    protected $entityClass = 'UthandoContact\Model\AbstractLine';
+    protected $entityClass = AbstractLine::class;
 
     /**
      * @param array $array
@@ -44,10 +44,10 @@ class AddressLinesCollection extends AbstractCollection
     }
 
     /**
-     * @param $addressLine
-     * @return $this
+     * @param array|AbstractLine $addressLine
+     * @return AddressLinesCollection
      */
-    public function addAddressLine($addressLine)
+    public function addAddressLine($addressLine): AddressLinesCollection
     {
         if ($addressLine instanceof AbstractLine) {
             $this->add($addressLine);

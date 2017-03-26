@@ -11,8 +11,7 @@
 
 namespace UthandoContact\Mvc\Controller;
 
-use UthandoContact\Service\ContactService;
-use Zend\Http\PhpEnvironment\Request;
+use UthandoContact\ServiceManager\ContactService;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -30,7 +29,7 @@ class ContactController extends AbstractActionController
     public function indexAction()
     {
         $form = $this->getServiceLocator()
-            ->get('UthandoContact\Service\Contact')
+            ->get(ContactService::class)
             ->getContactForm();
 
         return ['form' => $form];
@@ -46,7 +45,7 @@ class ContactController extends AbstractActionController
         }
 
         /* @var ContactService $service */
-        $service = $this->getServiceLocator()->get('UthandoContact\Service\Contact');
+        $service = $this->getServiceLocator()->get(ContactService::class);
 
         $form = $service->getContactForm($this->params()->fromPost());
 
@@ -59,7 +58,7 @@ class ContactController extends AbstractActionController
                 'form' => $form
             ]);
 
-            $model->setTemplate('uthando-contact/contact/index');
+            $model->setTemplate('uthando-contact/controller/contact/index');
 
             return $model;
         }

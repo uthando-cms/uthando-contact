@@ -12,7 +12,14 @@
 namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoCommon\Form\Element\Captcha;
 use UthandoContact\Model\AbstractLine;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Submit;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 use Zend\Form\Form;
 
 /**
@@ -44,7 +51,7 @@ class ContactForm extends Form
     {
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'attributes' => [
                 'placeholder' => 'Full Name',
                 'autofocus' => true,
@@ -61,7 +68,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => Email::class,
             'attributes' => [
                 'placeholder' => 'Email Address',
             ],
@@ -77,7 +84,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'subject',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Subject',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -93,7 +100,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'transport',
-            'type' => 'select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Department',
                 'value_options' => $this->getTransportList(),
@@ -107,7 +114,7 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'body',
-            'type' => 'textarea',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'Message',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -125,7 +132,7 @@ class ContactForm extends Form
         if (true === $this->getOption('enable_captcha')) {
             $this->add([
                 'name' => 'captcha',
-                'type' => 'UthandoCommonCaptcha',
+                'type' => Captcha::class,
                 'attributes' => [
                     'placeholder' => 'Type letters and number here',
                 ],
@@ -142,12 +149,12 @@ class ContactForm extends Form
 
         $this->add([
             'name' => 'csrf',
-            'type' => 'csrf',
+            'type' => Csrf::class,
         ]);
 
         $this->add([
             'name' => 'submit',
-            'type' => 'submit',
+            'type' => Submit::class,
             'attributes' => [
                 'id' => 'contact-submit-button',
                 'class' => 'btn btn-primary',

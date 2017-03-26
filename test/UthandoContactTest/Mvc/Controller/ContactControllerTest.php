@@ -11,6 +11,8 @@
 namespace UthandoContactTest\Mvc\Controller;
 
 use UthandoContact\Form\ContactForm;
+use UthandoContact\Mvc\Controller\ContactController;
+use UthandoContact\ServiceManager\ContactService;
 use UthandoContactTest\Framework\ApplicationTestCase;
 use Zend\Http\Header\Referer;
 
@@ -28,18 +30,18 @@ class ContactControllerTest extends ApplicationTestCase
         $this->dispatch('/contact');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('UthandoContact');
-        $this->assertControllerName('UthandoContact\Controller\Contact');
+        $this->assertControllerName(ContactController::class);
         $this->assertControllerClass('ContactController');
         $this->assertMatchedRouteName('contact');
     }
 
     public function testValidProcessAction()
     {
-        $contactServiceMock = $this->getMockBuilder('UthandoContact\ServiceManager\ContactService')
+        $contactServiceMock = $this->getMockBuilder(ContactService::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $formMock = $this->getMockBuilder('UthandoContact\Form\ContactForm')
+        $formMock = $this->getMockBuilder(ContactForm::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -55,10 +57,10 @@ class ContactControllerTest extends ApplicationTestCase
 
         $formElementManager = $serviceManager->get('FormElementManager');
         $formElementManager->setAllowOverride(true);
-        $formElementManager->setService('UthandoContact', $formMock);
+        $formElementManager->setService(ContactForm::class, $formMock);
 
         $serviceManager->setAllowOverride(true);
-        $serviceManager->setService('UthandoContact\Service\Contact', $contactServiceMock);
+        $serviceManager->setService(ContactService::class, $contactServiceMock);
 
         $this->dispatch('/contact/process', 'POST', $this->postData);
 
@@ -72,7 +74,7 @@ class ContactControllerTest extends ApplicationTestCase
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('UthandoContact');
-        $this->assertControllerName('UthandoContact\Controller\Contact');
+        $this->assertControllerName(ContactController::class);
         $this->assertControllerClass('ContactController');
         $this->assertMatchedRouteName('contact/process');
     }

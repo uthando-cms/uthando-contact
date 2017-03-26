@@ -14,7 +14,6 @@ namespace UthandoContact\ServiceManager;
 use UthandoCommon\Service\AbstractService;
 use UthandoContact\Form\ContactForm;
 use UthandoContact\InputFilter\ContactInputFilter;
-use UthandoContact\Options\DetailsOptions;
 use UthandoContact\Options\FormOptions;
 use Zend\Form\Form;
 use Zend\View\Model\ViewModel;
@@ -92,11 +91,11 @@ class ContactService extends AbstractService
         $formManager = $sl->get('FormElementManager');
         $inputFilterManager = $sl->get('InputFilterManager');
         /* @var ContactInputFilter $inputFilter */
-        $inputFilter = $inputFilterManager->get('UthandoContact\InputFilter\Contact');
+        $inputFilter = $inputFilterManager->get(ContactInputFilter::class);
         $formOptions = $this->getFormOptions();
 
         /* @var ContactForm $form */
-        $form = $formManager->get('UthandoContact', [
+        $form = $formManager->get(ContactForm::class, [
             'name'              => $formOptions->getName(),
             'enable_captcha'    => $formOptions->getEnableCaptcha(),
             'transport_list'    => $formOptions->getTransportList(),
@@ -117,6 +116,6 @@ class ContactService extends AbstractService
     public function getFormOptions()
     {
         $sl = $this->getServiceLocator();
-        return $sl->get('UthandoContact\Options\FormOptions');
+        return $sl->get(FormOptions::class);
     }
 }

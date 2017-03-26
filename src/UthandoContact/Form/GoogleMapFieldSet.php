@@ -12,9 +12,18 @@ namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoContact\Options\GoogleMapOptions;
+use Zend\Filter\Boolean;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Number;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\Between;
+use Zend\Validator\StringLength;
 
 /**
  * Class GoogleMapFieldSet
@@ -47,7 +56,7 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name'			=> 'show_map',
-            'type'			=> 'checkbox',
+            'type'			=> Checkbox::class,
             'options'		=> [
                 'label'			=> 'Show Map',
                 'use_hidden_element' => true,
@@ -61,7 +70,7 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'latitude',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Latitude',
                 'column-size' => 'md-8',
@@ -74,7 +83,7 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'longitude',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Longitude',
                 'column-size' => 'md-8',
@@ -87,7 +96,7 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'zoom',
-            'type' => 'number',
+            'type' => Number::class,
             'options' => [
                 'label' => 'Zoom',
                 'column-size' => 'md-8',
@@ -104,7 +113,7 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'color',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Color',
                 'column-size' => 'md-8',
@@ -126,19 +135,19 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
                 'required' => false,
                 'allow_empty' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Boolean'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class],
                 ],
             ],
             'latitude' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -148,11 +157,11 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
             'longitude' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -162,12 +171,12 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
             'zoom' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'ToInt'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => ToInt::class],
                 ],
                 'validators' => [
-                    ['name' => 'Between', 'options' => [
+                    ['name' => Between::class, 'options' => [
                         'min' => 1,
                         'max' => 20,
                         'inclusive' => true
@@ -177,11 +186,11 @@ class GoogleMapFieldSet extends Fieldset implements InputFilterProviderInterface
             'color' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,

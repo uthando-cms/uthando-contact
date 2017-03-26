@@ -10,8 +10,8 @@ return [
         				'options' => [
         					'route'    => '/contact',
         					'defaults' => [
-        						'__NAMESPACE__' => 'UthandoContact\Controller',
-        						'controller'    => 'Settings',
+        						'__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
+        						'controller'    => 'SettingsController',
         						'action'        => 'index',
         					    'force-ssl'     => 'ssl'
         					],

@@ -16,8 +16,8 @@ use libphonenumber\PhoneNumberFormat;
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoCommon\I18n\View\Helper\LibPhoneNumber;
 use UthandoCommon\View\AbstractViewHelper;
+use UthandoMail\Form\Element\MailTransportList;
 use Zend\Config\Config;
-use Zend\Form\FormElementManager;
 use Zend\View\Renderer\PhpRenderer;
 
 /**
@@ -109,7 +109,7 @@ class Contact extends AbstractViewHelper
     public function getLibPhoneNumberHelper()
     {
         if (!$this->libPhoneNumberHelper instanceof LibPhoneNumber) {
-            $this->libPhoneNumberHelper = $this->getView()->plugin('LibPhoneNumber');
+            $this->libPhoneNumberHelper = $this->getView()->plugin(LibPhoneNumber::class);
         }
 
         return $this->libPhoneNumberHelper;
@@ -124,7 +124,7 @@ class Contact extends AbstractViewHelper
         $formManager = $this->getServiceLocator()
             ->getServiceLocator()
             ->get('FormElementManager');
-        $select = $formManager->get('UthandoMailTransportList');
+        $select = $formManager->get(MailTransportList::class);
         $select->setName('transport_options');
         $select->setOptions([
             'label'	=> 'Email',

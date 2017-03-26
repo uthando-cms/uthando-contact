@@ -29,7 +29,7 @@ class FormFieldSetTest extends TestCase
     public function testInit()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactFormFieldSet');
+        $fieldSet = $sl->get(FormFieldSet::class);
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('name'));

@@ -23,7 +23,7 @@ class BusinessHoursCollection extends AbstractCollection
     /**
      * @var string
      */
-    protected $entityClass = 'UthandoContact\Model\AbstractLine';
+    protected $entityClass = AbstractLine::class;
 
     /**
      * @param array $array
@@ -44,10 +44,10 @@ class BusinessHoursCollection extends AbstractCollection
     }
 
     /**
-     * @param $hourLine
-     * @return $this
+     * @param AbstractLine|array $hourLine
+     * @return BusinessHoursCollection
      */
-    public function addBusinessHourLine($hourLine)
+    public function addBusinessHourLine($hourLine): BusinessHoursCollection
     {
         if ($hourLine instanceof AbstractLine) {
             $this->add($hourLine);

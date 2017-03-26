@@ -29,7 +29,7 @@ class DetailsFieldSetTest extends TestCase
     public function testInit()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactDetailsFieldSet');
+        $fieldSet = $sl->get(DetailsFieldSet::class);
         $fieldSet->init();
 
         $this->assertTrue($fieldSet->has('name'));
@@ -46,7 +46,7 @@ class DetailsFieldSetTest extends TestCase
     public function testGetInputFilterConfig()
     {
         $sl = $this->serviceManager->get('FormElementManager');
-        $fieldSet = $sl->get('UthandoContactDetailsFieldSet');
+        $fieldSet = $sl->get(DetailsFieldSet::class);
         $fieldSet->init();
         $spec = $fieldSet->getInputFilterSpecification();
 

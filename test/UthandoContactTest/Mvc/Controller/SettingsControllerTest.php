@@ -10,6 +10,8 @@
 
 namespace UthandoContactTest\Mvc\Controller;
 
+use UthandoContact\Form\ContactSettings;
+use UthandoContact\Mvc\Controller\SettingsController;
 use UthandoContactTest\Framework\TestCase;
 
 class SettingsControllerTest extends TestCase
@@ -18,10 +20,10 @@ class SettingsControllerTest extends TestCase
     {
         /* @var $controller \UthandoDomPdf\Mvc\Controller\Settings */
         $controller = $this->serviceManager->get('ControllerManager')
-            ->get('UthandoContact\Controller\Settings');
+            ->get(SettingsController::class);
 
         $this->assertInstanceOf('UthandoContact\Mvc\Controller\SettingsController', $controller);
-        $this->assertSame('UthandoContactSettings', $controller->getFormName());
+        $this->assertSame(ContactSettings::class, $controller->getFormName());
         $this->assertSame('uthando_contact', $controller->getConfigKey());
     }
 }

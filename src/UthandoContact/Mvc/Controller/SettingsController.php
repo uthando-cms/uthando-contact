@@ -11,6 +11,7 @@
 namespace UthandoContact\Mvc\Controller;
 
 use UthandoCommon\Controller\SettingsTrait;
+use UthandoContact\Form\ContactSettings;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**
@@ -27,7 +28,7 @@ class SettingsController extends AbstractActionController
      */
     public function __construct()
     {
-        $this->setFormName('UthandoContactSettings')
+        $this->setFormName(ContactSettings::class)
             ->setConfigKey('uthando_contact');
     }
 }

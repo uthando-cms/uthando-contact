@@ -1,40 +1,39 @@
 <?php
 
+use UthandoContact\Form\View\Helper\AbstractLineFormCollection;
+use UthandoContact\InputFilter\ContactInputFilter;
+use UthandoContact\InputFilter\ContactInputFilterFactory;
+use UthandoContact\Mvc\Controller\ContactController;
+use UthandoContact\Mvc\Controller\SettingsController;
+use UthandoContact\Options\FormOptions;
+use UthandoContact\ServiceManager\ContactService;
+use UthandoContact\ServiceManager\FormOptionsFactory;
+use UthandoContact\View\Helper\Contact;
+
 return [
     'controllers' => [
         'invokables' => [
-            'UthandoContact\Controller\Contact'     => \UthandoContact\Mvc\Controller\ContactController::class,
-            'UthandoContact\Controller\Settings'    => \UthandoContact\Mvc\Controller\SettingsController::class,
-        ],
-    ],
-    'form_elements' => [
-        'invokables' => [
-            'UthandoContact'                            => 'UthandoContact\Form\ContactForm',
-            'UthandoContact\Form\AbstractLineFieldSet'  => 'UthandoContact\Form\AbstractLineFieldSet',
-            'UthandoContactCompanyFieldSet'             => 'UthandoContact\Form\CompanyFieldSet',
-            'UthandoContactDetailsFieldSet'             => 'UthandoContact\Form\DetailsFieldSet',
-            'UthandoContactFormFieldSet'                => 'UthandoContact\Form\FormFieldSet',
-            'UthandoContactGoogleMapFieldSet'           => 'UthandoContact\Form\GoogleMapFieldSet',
-            'UthandoContactSettings'                    => 'UthandoContact\Form\ContactSettings',
+            ContactController::class    => ContactController::class,
+            SettingsController::class   => SettingsController::class,
         ],
     ],
     'input_filters' => [
         'factories' => [
-            'UthandoContact\InputFilter\Contact' => \UthandoContact\InputFilter\ContactInputFilterFactory::class,
+           ContactInputFilter::class => ContactInputFilterFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            'UthandoContact\Options\FormOptions'    => 'UthandoContact\ServiceManager\FormOptionsFactory',
+            FormOptions::class    => FormOptionsFactory::class,
         ],
         'invokables'    => [
-            'UthandoContact\Service\Contact' => 'UthandoContact\ServiceManager\ContactService',
+            ContactService::class => ContactService::class,
         ],
     ],
     'view_helpers' => [
         'invokables' => [
-            'Contact'                       => 'UthandoContact\View\Helper\Contact',
-            'AbstractLineFormCollection'    => 'UthandoContact\Form\View\Helper\AbstractLineFormCollection',
+            'Contact'                       => Contact::class,
+            'AbstractLineFormCollection'    => AbstractLineFormCollection::class,
         ],
     ],
     'view_manager'  => [
@@ -47,8 +46,8 @@ return [
                 'options' => [
                     'route' => '/contact',
                     'defaults' => [
-                        '__NAMESPACE__' => 'UthandoContact\Controller',
-                        'controller'    => 'Contact',
+                        '__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
+                        'controller'    => 'ContactController',
                         'action'        => 'index',
                         'force-ssl'     => 'ssl'
                     ],

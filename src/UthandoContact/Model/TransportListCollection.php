@@ -23,7 +23,7 @@ class TransportListCollection extends AbstractCollection
     /**
      * @var string
      */
-    protected $entityClass = 'UthandoContact\Model\AbstractLine';
+    protected $entityClass = AbstractLine::class;
 
     /**
      * @param array $array
@@ -44,10 +44,10 @@ class TransportListCollection extends AbstractCollection
     }
 
     /**
-     * @param $transportLine
-     * @return $this
+     * @param AbstractLine|array $transportLine
+     * @return TransportListCollection
      */
-    public function addTransportLine($transportLine)
+    public function addTransportLine($transportLine): TransportListCollection
     {
         if ($transportLine instanceof AbstractLine) {
             $this->add($transportLine);

@@ -10,12 +10,23 @@
 
 namespace UthandoContact\Form;
 
-
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoCommon\Form\Element\LibPhoneNumberCountryList;
+use UthandoCommon\I18n\Filter\PhoneNumber;
+use UthandoCommon\I18n\Validator\PhoneNumber as PhoneNumberValidator;
 use UthandoContact\Options\DetailsOptions;
+use Zend\Filter\Digits;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Collection;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\EmailAddress;
+use Zend\Validator\StringLength;
 
 /**
  * Class DetailsFieldSet
@@ -48,7 +59,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Name',
                 'column-size' => 'md-8',
@@ -60,7 +71,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => 'Zend\Form\Element\Collection',
+            'type' => Collection::class,
             'name' => 'address',
             'options' => [
                 'label' => 'Add address lines',
@@ -81,7 +92,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'		=> 'phone_region',
-            'type'		=> 'UthandoCommonLibPhoneNumberCountryList',
+            'type'		=> LibPhoneNumberCountryList::class,
             'options'	=> [
                 'label'	=> 'Phone Region',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -94,7 +105,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'phone',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Phone No',
                 'column-size' => 'md-8',
@@ -107,7 +118,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'mobile',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Mobile No',
                 'column-size' => 'md-8',
@@ -120,7 +131,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'fax',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Fax No',
                 'column-size' => 'md-8',
@@ -133,7 +144,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'email',
-            'type' => 'email',
+            'type' => Email::class,
             'options' => [
                 'label' => 'Email Address',
                 'column-size' => 'md-8',
@@ -145,7 +156,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => 'Zend\Form\Element\Collection',
+            'type' => Collection::class,
             'name' => 'business_hours',
             'options' => [
                 'label' => 'Add Business Hours',
@@ -166,7 +177,7 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'about_us_text',
-            'type' => 'textarea',
+            'type' => Textarea::class,
             'options' => [
                 'label' => 'About Us Text',
                 'column-size' => 'md-8',
@@ -189,11 +200,11 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
             'name' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -203,15 +214,15 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
             'phone' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Digits'],
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Digits::class],
+                    ['name' => PhoneNumber::class, 'options' => [
                         'country' => $countryCode,
                     ]]
                 ],
                 'validators' => [
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => PhoneNumberValidator::class, 'options' => [
                         'country' => $countryCode,
                     ]],
                 ],
@@ -219,15 +230,15 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
             'mobile' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Digits'],
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Digits::class],
+                    ['name' => PhoneNumber::class, 'options' => [
                         'country' => $countryCode,
                     ]]
                 ],
                 'validators' => [
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => PhoneNumberValidator::class, 'options' => [
                         'country' => $countryCode,
                     ]],
                 ],
@@ -235,15 +246,15 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
             'fax' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Digits'],
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Digits::class],
+                    ['name' => PhoneNumber::class, 'options' => [
                         'country' => $countryCode,
                     ]]
                 ],
                 'validators' => [
-                    ['name' => 'UthandoCommonPhoneNumber', 'options' => [
+                    ['name' => PhoneNumberValidator::class, 'options' => [
                         'country' => $countryCode,
                     ]],
                 ],
@@ -251,21 +262,21 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
             'email' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'EmailAddress'],
+                    ['name' => EmailAddress::class],
                 ],
             ],
             'about_us_text' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,

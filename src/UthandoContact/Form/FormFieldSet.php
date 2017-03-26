@@ -12,9 +12,16 @@ namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoContact\Options\FormOptions;
+use Zend\Filter\Boolean;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Collection;
+use Zend\Form\Element\Radio;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
 /**
  * Class FormFieldSet
@@ -44,7 +51,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Form Name',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -56,7 +63,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => 'Zend\Form\Element\Collection',
+            'type' => Collection::class,
             'name' => 'transport_list',
             'options' => [
                 'label' => 'Transport List',
@@ -77,7 +84,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'send_copy_to_sender',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Send Copy to Sender',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -108,7 +115,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'enable_captcha',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Enable Captcha',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -139,7 +146,7 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'enable_akismet',
-            'type' => 'radio',
+            'type' => Radio::class,
             'options' => [
                 'label' => 'Enable Akismet',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -178,11 +185,11 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
             'name' => [
                 'required' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -193,27 +200,27 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
                 'required' => false,
                 'allow_empty' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Boolean'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class],
                 ],
             ],
             'enable_captcha' => [
                 'required' => false,
                 'allow_empty' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Boolean'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class],
                 ],
             ],
             'enable_akismet' => [
                 'required' => false,
                 'allow_empty' => true,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
-                    ['name' => 'Boolean'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
+                    ['name' => Boolean::class],
                 ],
             ],
         ];

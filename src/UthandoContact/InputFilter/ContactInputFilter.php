@@ -12,8 +12,12 @@
 namespace UthandoContact\InputFilter;
 
 use UthandoCommon\Validator\Akismet;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\EmailAddress;
 use Zend\Validator\Hostname as HostnameValidator;
+use Zend\Validator\StringLength;
 
 /**
  * Class ContactInputFilter
@@ -41,8 +45,8 @@ class ContactInputFilter extends InputFilter
             'name' => 'name',
             'required' => true,
             'filters' => [
-                ['name' => 'StripTags'],
-                ['name' => 'StringTrim'],
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
             ],
         ]);
 
@@ -50,11 +54,11 @@ class ContactInputFilter extends InputFilter
             'name' => 'email',
             'required' => true,
             'filters' => [
-                ['name' => 'StripTags'],
-                ['name' => 'StringTrim'],
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
             ],
             'validators' => [
-                ['name' => 'EmailAddress', 'options' => [
+                ['name' => EmailAddress::class, 'options' => [
                     'allow' => HostnameValidator::ALLOW_DNS,
                     'domain' => true
                 ]],
@@ -65,11 +69,11 @@ class ContactInputFilter extends InputFilter
             'name' => 'subject',
             'required' => true,
             'filters' => [
-                ['name' => 'StripTags'],
-                ['name' => 'StringTrim'],
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
             ],
             'validators' => [
-                ['name' => 'StringLength', 'options' => [
+                ['name' => StringLength::class, 'options' => [
                     'encoding' => 'UTF-8',
                     'min' => 2,
                     'max' => 140,
@@ -81,7 +85,7 @@ class ContactInputFilter extends InputFilter
             'name' => 'body',
             'required' => true,
             'filters' => [
-                ['name' => 'StripTags'],
+                ['name' => StripTags::class],
             ],
         ]);
 
@@ -90,7 +94,7 @@ class ContactInputFilter extends InputFilter
 
             $this->get('body')
                 ->getValidatorChain()
-                ->attachByName('UthandoCommonAkismet', [
+                ->attachByName(Akismet::class, [
                     'api_key'               => $options['api_key'] ?? null,
                     'blog'                  => $options['blog'] ?? null,
                     'comment_type'          => Akismet::COMMENT_TYPE_CONTACT_FORM,

@@ -12,9 +12,14 @@ namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoContact\Options\CompanyOptions;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Form\Element\Collection;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Validator\StringLength;
 
 /**
  * Class CompanyFieldSet
@@ -47,7 +52,7 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
     {
         $this->add([
             'name' => 'name',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Company Name',
                 'column-size' => 'md-8',
@@ -60,7 +65,7 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name' => 'number',
-            'type' => 'text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Company Number',
                 'column-size' => 'md-8',
@@ -72,7 +77,7 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'type' => 'Zend\Form\Element\Collection',
+            'type' => Collection::class,
             'name' => 'address',
             'options' => [
                 'label' => 'Add address lines',
@@ -101,11 +106,11 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
             'name' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StripTags::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,
@@ -115,11 +120,11 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
             'number' => [
                 'required' => false,
                 'filters' => [
-                    ['name' => 'StripTags'],
-                    ['name' => 'StringTrim'],
+                    ['name' => StripTags::class],
+                    ['name' => StringTrim::class],
                 ],
                 'validators' => [
-                    ['name' => 'StringLength', 'options' => [
+                    ['name' => StringLength::class, 'options' => [
                         'encoding' => 'UTF-8',
                         'min'      => 1,
                         'max'      => 255,

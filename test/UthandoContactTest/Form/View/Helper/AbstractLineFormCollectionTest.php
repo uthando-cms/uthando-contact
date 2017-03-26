@@ -10,6 +10,8 @@
 
 namespace UthandoContactTest\Form\View\Helper;
 
+use UthandoContact\Form\ContactSettings;
+use UthandoContact\Form\View\Helper\AbstractLineFormCollection;
 use UthandoContactTest\Framework\ApplicationTestCase;
 
 class AbstractLineFormCollectionTest extends ApplicationTestCase
@@ -18,7 +20,7 @@ class AbstractLineFormCollectionTest extends ApplicationTestCase
     {
         $viewHelper = $this->getApplicationServiceLocator()
             ->get('ViewHelperManager')
-            ->get('AbstractLineFormCollection');
+            ->get(AbstractLineFormCollection::class);
 
         $this->assertInstanceOf('UthandoContact\Form\View\Helper\AbstractLineFormCollection', $viewHelper);
     }
@@ -46,13 +48,13 @@ class AbstractLineFormCollectionTest extends ApplicationTestCase
 
         $form = $this->getApplicationServiceLocator()
             ->get('FormElementManager')
-            ->get('UthandoContactSettings');
+            ->get(ContactSettings::class);
 
         $form->setData($testData);
 
         $viewHelper = $this->getApplicationServiceLocator()
             ->get('ViewHelperManager')
-            ->get('AbstractLineFormCollection');
+            ->get(AbstractLineFormCollection::class);
 
         $viewHelper->setLineType('transport-list');
 

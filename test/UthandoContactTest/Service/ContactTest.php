@@ -10,6 +10,8 @@
 
 namespace UthandoContactTest\Service;
 
+use UthandoContact\Form\ContactForm;
+use UthandoContact\ServiceManager\ContactService;
 use UthandoContactTest\Framework\TestCase;
 
 class ContactTest extends TestCase
@@ -24,7 +26,7 @@ class ContactTest extends TestCase
 
     public function testSendMail()
     {
-        $formMock = $this->getMockBuilder('UthandoContact\Form\ContactForm')
+        $formMock = $this->getMockBuilder(ContactForm::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -32,7 +34,7 @@ class ContactTest extends TestCase
             ->method('getData')
             ->willReturn($this->postData);
 
-        $service = $this->serviceManager->get('UthandoContact\Service\Contact');
+        $service = $this->serviceManager->get(ContactService::class);
 
         $response = $service->sendEmail($formMock);
         $this->assertTrue($response);
