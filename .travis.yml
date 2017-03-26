@@ -16,7 +16,7 @@ before_script:
   - cd module/UthandoContact/test
 
 script:
-  - then phpdbg -qrr ../../../vendor/bin/phpunit -v
+  - phpdbg -qrr ../../../vendor/bin/phpunit -v
 
 after_script:
   - cd ../
