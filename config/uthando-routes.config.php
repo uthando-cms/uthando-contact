@@ -13,7 +13,6 @@ return [
         						'__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
         						'controller'    => 'SettingsController',
         						'action'        => 'index',
-        					    'force-ssl'     => 'ssl'
         					],
         				],
         				'may_terminate' => true,
