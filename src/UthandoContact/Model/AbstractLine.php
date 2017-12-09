@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
@@ -11,13 +11,14 @@
 namespace UthandoContact\Model;
 
 use UthandoCommon\Model\Model;
+use UthandoCommon\Model\ModelInterface;
 
 /**
  * Class AbstractLine
  *
  * @package UthandoContact\Model
  */
-class AbstractLine
+class AbstractLine implements ModelInterface
 {
     use Model;
 

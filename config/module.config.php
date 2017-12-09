@@ -1,20 +1,45 @@
 <?php
 
+use UthandoContact\Form\AbstractLineFieldSet;
+use UthandoContact\Form\CompanyFieldSet;
+use UthandoContact\Form\ContactForm;
+use UthandoContact\Form\ContactSettings;
+use UthandoContact\Form\DetailsFieldSet;
+use UthandoContact\Form\FormFieldSet;
+use UthandoContact\Form\GoogleMapFieldSet;
 use UthandoContact\Form\View\Helper\AbstractLineFormCollection;
 use UthandoContact\InputFilter\ContactInputFilter;
 use UthandoContact\InputFilter\ContactInputFilterFactory;
 use UthandoContact\Mvc\Controller\ContactController;
 use UthandoContact\Mvc\Controller\SettingsController;
+use UthandoContact\Options\CompanyOptions;
+use UthandoContact\Options\DetailsOptions;
 use UthandoContact\Options\FormOptions;
+use UthandoContact\Options\GoogleMapOptions;
+use UthandoContact\Options\Service\CompanyOptionsFactory;
+use UthandoContact\Options\Service\DetailsOptionsFactory;
+use UthandoContact\Options\Service\FormOptionsFactory;
+use UthandoContact\Options\Service\GoogleMapOptionsFactory;
 use UthandoContact\ServiceManager\ContactService;
-use UthandoContact\ServiceManager\FormOptionsFactory;
 use UthandoContact\View\Helper\Contact;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'controllers' => [
         'invokables' => [
             ContactController::class    => ContactController::class,
             SettingsController::class   => SettingsController::class,
+        ],
+    ],
+    'form_elements' => [
+        'factories' => [
+            AbstractLineFieldSet::class => InvokableFactory::class,
+            CompanyFieldSet::class      => InvokableFactory::class,
+            ContactForm::class          => InvokableFactory::class,
+            ContactSettings::class      => InvokableFactory::class,
+            DetailsFieldSet::class      => InvokableFactory::class,
+            FormFieldSet::class         => InvokableFactory::class,
+            GoogleMapFieldSet::class    => InvokableFactory::class
         ],
     ],
     'input_filters' => [
@@ -24,16 +49,23 @@ return [
     ],
     'service_manager' => [
         'factories' => [
-            FormOptions::class    => FormOptionsFactory::class,
+            CompanyOptions::class   => CompanyOptionsFactory::class,
+            DetailsOptions::class   => DetailsOptionsFactory::class,
+            FormOptions::class      => FormOptionsFactory::class,
+            GoogleMapOptions::class => GoogleMapOptionsFactory::class,
         ],
         'invokables' => [
             ContactService::class => ContactService::class,
         ],
     ],
     'view_helpers' => [
+        'aliases' => [
+            'contact'                       => Contact::class,
+            'abstractLineFormCollection'    => AbstractLineFormCollection::class,
+        ],
         'invokables' => [
-            'Contact'                       => Contact::class,
-            'AbstractLineFormCollection'    => AbstractLineFormCollection::class,
+            Contact::class                      => Contact::class,
+            AbstractLineFormCollection::class   => AbstractLineFormCollection::class,
         ],
     ],
     'view_manager'  => [
@@ -47,7 +79,7 @@ return [
                     'route' => '/contact',
                     'defaults' => [
                         '__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
-                        'controller'    => 'ContactController',
+                        'controller'    => ContactController::class,
                         'action'        => 'index',
                     ],
                 ],

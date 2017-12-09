@@ -11,6 +11,7 @@
 namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoCommon\Hydrator\Strategy\CollectionToArrayStrategy;
 use UthandoContact\Options\FormOptions;
 use Zend\Filter\Boolean;
 use Zend\Filter\StringTrim;
@@ -43,7 +44,10 @@ class FormFieldSet extends Fieldset implements InputFilterProviderInterface
 
         parent::__construct($name, $options);
 
-        $this->setHydrator(new ClassMethods())
+        $hydrator = new ClassMethods();
+        $hydrator->addStrategy('transport_list', new CollectionToArrayStrategy());
+
+        $this->setHydrator($hydrator)
             ->setObject(new FormOptions());
     }
 

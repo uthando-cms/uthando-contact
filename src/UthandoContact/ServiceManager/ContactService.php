@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
@@ -34,13 +34,13 @@ class ContactService extends AbstractService
      * @param $data
      * @return bool
      */
-    public function sendEmail($data)
+    public function sendEmail($data): bool
     {
         if ($data instanceof Form) {
             $data = $data->getData();
         }
 
-        $formOptions = $this->getFormOptions();
+        $formOptions = $this->getOptions();
 
         $emailView = new ViewModel([
             'data' => $data,
@@ -81,18 +81,14 @@ class ContactService extends AbstractService
         return true;
     }
 
-    /**
-     * @param null $data
-     * @return mixed
-     */
-    public function getContactForm($data = null)
+    public function getContactForm(array $data = null): ContactForm
     {
         $sl = $this->getServiceLocator();
         $formManager = $sl->get('FormElementManager');
         $inputFilterManager = $sl->get('InputFilterManager');
         /* @var ContactInputFilter $inputFilter */
         $inputFilter = $inputFilterManager->get(ContactInputFilter::class);
-        $formOptions = $this->getFormOptions();
+        $formOptions = $this->getOptions();
 
         /* @var ContactForm $form */
         $form = $formManager->get(ContactForm::class, [
@@ -110,12 +106,11 @@ class ContactService extends AbstractService
         return $form;
     }
 
-    /**
-     * @return FormOptions
-     */
-    public function getFormOptions()
+    public function getOptions(): FormOptions
     {
         $sl = $this->getServiceLocator();
-        return $sl->get(FormOptions::class);
+        /** @var FormOptions $options */
+        $options = $sl->get(FormOptions::class);
+        return $options;
     }
 }

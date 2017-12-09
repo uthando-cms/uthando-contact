@@ -11,7 +11,7 @@ return [
         					'route'    => '/contact',
         					'defaults' => [
         						'__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
-        						'controller'    => 'SettingsController',
+        						'controller'    => \UthandoContact\Mvc\Controller\SettingsController::class,
         						'action'        => 'index',
         					],
         				],

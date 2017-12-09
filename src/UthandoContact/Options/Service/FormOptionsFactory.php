@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
@@ -8,7 +8,7 @@
  * @license   see LICENSE
  */
 
-namespace UthandoContact\ServiceManager;
+namespace UthandoContact\Options\Service;
 
 use UthandoContact\Options\FormOptions;
 use Zend\ServiceManager\FactoryInterface;
@@ -16,20 +16,15 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class FormOptionsFactory
- *
- * @package UthandoContact\ServiceManager
+ * @package UthandoContact\Options\Service
  */
 class FormOptionsFactory implements FactoryInterface
 {
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return FormOptions
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function createService(ServiceLocatorInterface $serviceLocator): FormOptions
     {
         $config         = $serviceLocator->get('config');
-        $formOptions    = (isset($config['uthando_contact']['form'])) ? $config['uthando_contact']['form'] : [];
-        $options        = new FormOptions($formOptions);
+        $options        = $config['uthando_contact']['form'] ?? [];
+        $options        = new FormOptions($options);
 
         return $options;
     }

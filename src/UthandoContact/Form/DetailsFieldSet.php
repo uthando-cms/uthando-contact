@@ -12,6 +12,7 @@ namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoCommon\Form\Element\LibPhoneNumberCountryList;
+use UthandoCommon\Hydrator\Strategy\CollectionToArrayStrategy;
 use UthandoCommon\I18n\Filter\PhoneNumber;
 use UthandoCommon\I18n\Validator\PhoneNumber as PhoneNumberValidator;
 use UthandoContact\Options\DetailsOptions;
@@ -48,7 +49,11 @@ class DetailsFieldSet extends Fieldset implements InputFilterProviderInterface
 
         parent::__construct($name, $options);
 
-        $this->setHydrator(new ClassMethods())
+        $hydrator = new ClassMethods();
+        $hydrator->addStrategy('address', new CollectionToArrayStrategy());
+        $hydrator->addStrategy('business_hours', new CollectionToArrayStrategy());
+
+        $this->setHydrator($hydrator)
             ->setObject(new DetailsOptions());
     }
 

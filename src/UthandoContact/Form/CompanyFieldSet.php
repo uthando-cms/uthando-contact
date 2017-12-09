@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
@@ -11,6 +11,7 @@
 namespace UthandoContact\Form;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
+use UthandoCommon\Hydrator\Strategy\CollectionToArrayStrategy;
 use UthandoContact\Options\CompanyOptions;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
@@ -41,7 +42,10 @@ class CompanyFieldSet extends Fieldset implements InputFilterProviderInterface
 
         parent::__construct($name, $options);
 
-        $this->setHydrator(new ClassMethods())
+        $hydrator = new ClassMethods();
+        $hydrator->addStrategy('address', new CollectionToArrayStrategy());
+
+        $this->setHydrator($hydrator)
             ->setObject(new CompanyOptions());
     }
 
