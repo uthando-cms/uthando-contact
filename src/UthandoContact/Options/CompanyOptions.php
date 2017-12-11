@@ -10,6 +10,8 @@
 
 namespace UthandoContact\Options;
 
+use UthandoCommon\Model\AbstractCollection;
+use UthandoCommon\Model\ModelInterface;
 use UthandoContact\Model\AddressLinesCollection;
 use Zend\Stdlib\AbstractOptions;
 use Zend\Stdlib\Exception\InvalidArgumentException;
@@ -100,5 +102,27 @@ class CompanyOptions extends AbstractOptions
         $this->address = $addressLines;
 
         return $this;
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $returnArray = [];
+
+        foreach ($array as $key => $value) {
+
+            if ($value instanceof AbstractCollection) {
+                $entities = $value->getEntities();
+                foreach ($entities as $item => $model) {
+                    if ($model instanceof ModelInterface) {
+                        $returnArray[$key][$item] = $model->getArrayCopy();
+                    }
+                }
+            } else {
+                $returnArray[$key] = $value;
+            }
+        }
+
+        return $returnArray;
     }
 }

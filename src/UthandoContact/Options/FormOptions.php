@@ -10,6 +10,8 @@
 
 namespace UthandoContact\Options;
 
+use UthandoCommon\Model\AbstractCollection;
+use UthandoCommon\Model\ModelInterface;
 use UthandoContact\Model\TransportListCollection;
 use Zend\Stdlib\AbstractOptions;
 use Zend\Stdlib\Exception\InvalidArgumentException;
@@ -145,5 +147,27 @@ class FormOptions extends AbstractOptions
     {
         $this->enableAkismet = (bool) $enableAkismet;
         return $this;
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $returnArray = [];
+
+        foreach ($array as $key => $value) {
+
+            if ($value instanceof AbstractCollection) {
+                $entities = $value->getEntities();
+                foreach ($entities as $item => $model) {
+                    if ($model instanceof ModelInterface) {
+                        $returnArray[$key][$item] = $model->getArrayCopy();
+                    }
+                }
+            } else {
+                $returnArray[$key] = $value;
+            }
+        }
+
+        return $returnArray;
     }
 }
