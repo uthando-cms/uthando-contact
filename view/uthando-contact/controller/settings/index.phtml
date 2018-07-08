@@ -144,6 +144,7 @@ $googleMapOptions = $form->get('google_map');
     </div>
 </div>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script type="text/javascript">
     $('#mail-transport-save').on('click', function(e){
         e.preventDefault();
@@ -251,4 +252,5 @@ $googleMapOptions = $form->get('google_map');
         row.remove();
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
 
