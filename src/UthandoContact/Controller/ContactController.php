@@ -58,7 +58,7 @@ class ContactController extends AbstractActionController
                 'form' => $form
             ]);
 
-            $model->setTemplate('uthando-contact/controller/contact/index');
+            $model->setTemplate('uthando-contact/contact/index');
 
             return $model;
         }

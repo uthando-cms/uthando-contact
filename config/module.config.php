@@ -1,5 +1,7 @@
 <?php
 
+use UthandoContact\Controller\ContactController;
+use UthandoContact\Controller\SettingsController;
 use UthandoContact\Form\AbstractLineFieldSet;
 use UthandoContact\Form\CompanyFieldSet;
 use UthandoContact\Form\ContactForm;
@@ -10,8 +12,6 @@ use UthandoContact\Form\GoogleMapFieldSet;
 use UthandoContact\Form\View\Helper\AbstractLineFormCollection;
 use UthandoContact\InputFilter\ContactInputFilter;
 use UthandoContact\InputFilter\ContactInputFilterFactory;
-use UthandoContact\Controller\ContactController;
-use UthandoContact\Controller\SettingsController;
 use UthandoContact\Options\CompanyOptions;
 use UthandoContact\Options\DetailsOptions;
 use UthandoContact\Options\FormOptions;
@@ -78,7 +78,7 @@ return [
                 'options' => [
                     'route' => '/contact',
                     'defaults' => [
-                        '__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
+                        '__NAMESPACE__' => 'UthandoContact\Controller',
                         'controller'    => ContactController::class,
                         'action'        => 'index',
                     ],
