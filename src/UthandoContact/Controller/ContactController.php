@@ -9,7 +9,7 @@
  * @license   see LICENSE.txt
  */
 
-namespace UthandoContact\Mvc\Controller;
+namespace UthandoContact\Controller;
 
 use UthandoContact\ServiceManager\ContactService;
 use Zend\Http\Response;

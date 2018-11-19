@@ -1,5 +1,8 @@
 <?php
 
+use UthandoContact\Controller\ContactController;
+use UthandoContact\Controller\SettingsController;
+
 return [
     'uthando_user' => [
         'acl' => [
@@ -8,7 +11,7 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                \UthandoContact\Mvc\Controller\ContactController::class => ['action' => 'all'],
+                                ContactController::class => ['action' => 'all'],
                             ],
                         ],
                     ],
@@ -17,15 +20,15 @@ return [
                     'privileges' => [
                         'allow' => [
                             'controllers' => [
-                                \UthandoContact\Mvc\Controller\SettingsController::class => ['action' => 'all'],
+                                SettingsController::class => ['action' => 'all'],
                             ],
                         ],
                     ],
                 ],
             ],
             'resources' => [
-                \UthandoContact\Mvc\Controller\ContactController::class,
-                \UthandoContact\Mvc\Controller\SettingsController::class,
+                ContactController::class,
+                SettingsController::class,
             ],
         ],
     ],

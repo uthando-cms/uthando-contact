@@ -8,7 +8,7 @@
  * @license   see LICENSE.txt
  */
 
-namespace UthandoContact\Mvc\Controller;
+namespace UthandoContact\Controller;
 
 use UthandoCommon\Controller\SettingsTrait;
 use UthandoContact\Form\ContactSettings;

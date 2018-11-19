@@ -1,5 +1,7 @@
 <?php
 
+use UthandoContact\Controller\SettingsController;
+
 return [
     'router' => [
         'routes' => [
@@ -10,8 +12,8 @@ return [
         				'options' => [
         					'route'    => '/contact',
         					'defaults' => [
-        						'__NAMESPACE__' => 'UthandoContact\Mvc\Controller',
-        						'controller'    => \UthandoContact\Mvc\Controller\SettingsController::class,
+        						'__NAMESPACE__' => 'UthandoContact\Controller',
+        						'controller'    => SettingsController::class,
         						'action'        => 'index',
         					],
         				],
